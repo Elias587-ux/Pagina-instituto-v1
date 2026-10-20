@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IES N° 11 · Formando profesionales con compromiso social</title>
+  <meta name="description" content="Instituto de Educación Superior N° 11 de Jujuy. Carreras, preinscripción, trámites estudiantiles, mesas de examen, calendario académico y novedades.">
+  <meta name="theme-color" content="#313E59">
+  <meta property="og:title" content="IES N° 11 · Formando profesionales con compromiso social">
+  <meta property="og:description" content="Carreras, trámites, calendario académico y novedades del Instituto de Educación Superior N° 11.">
+  <meta property="og:image" content="/assets/logo-ies11.svg">
+  <link rel="icon" href="/assets/logo-ies11.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ═══ Alerta urgente (administrable desde el panel) ═══ -->
+  <div class="alert-bar" id="alertBar" role="region" aria-label="Aviso importante" hidden>
+    <div class="container alert-bar__inner">
+      <span class="alert-bar__icon" data-icon="megaphone"></span>
+      <p class="alert-bar__text"></p>
+      <a class="alert-bar__link" href="#" hidden></a>
+      <button class="alert-bar__close" type="button" aria-label="Cerrar aviso"><span data-icon="x"></span></button>
+    </div>
+  </div>
+
+  <!-- ═══ Header ═══ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container site-header__inner">
+      <a class="brand" href="/" aria-label="IES N° 11 — Inicio">
+        <img src="/assets/logo-ies11.svg" alt="" width="52" height="52">
+        <span>
+          <span class="brand__name">IES N° 11</span>
+          <span class="brand__sub">Instituto de Educación Superior · Jujuy</span>
+        </span>
+      </a>
+
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <label class="sr-only" for="searchInput">Buscar carreras, trámites, fechas o noticias</label>
+        <span class="search__icon" data-icon="search"></span>
+        <input class="search__input" id="searchInput" type="search" placeholder="¿Qué estás buscando?"
+               role="combobox" aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list" maxlength="60">
+        <div class="search__results" id="searchResults" role="listbox" aria-label="Resultados de búsqueda" hidden></div>
+      </form>
+
+      <div class="header-actions">
+        <a class="btn btn--brand header-actions__cta" href="#carreras" data-preinscription>Preinscribite</a>
+        <a class="pill-btn pill-btn--icon" href="/login" aria-label="Acceso administrativo" title="Acceso administrativo"><span data-icon="user"></span></a>
+        <button class="pill-btn" type="button" id="menuOpen" aria-haspopup="dialog" aria-controls="menuDrawer">
+          <span class="pill-btn__label">MENÚ</span><span data-icon="menu"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ Barra de perfiles (flotante y fija al hacer scroll) ═══ -->
+  <nav class="profile-bar" id="profileBar" aria-label="Accesos por perfil">
+    <div class="profile-bar__inner">
+      <a class="profile-bar__brand" href="#top" aria-label="Volver al inicio"><img src="/assets/logo-ies11.svg" alt="" width="34" height="34"></a>
+      <ul class="profile-bar__list">
+        <li><a class="profile-bar__link" href="#carreras"><span data-icon="user-plus"></span>Ingresantes</a></li>
+        <li><a class="profile-bar__link" href="#tramites"><span data-icon="users"></span>Estudiantes</a></li>
+        <li><a class="profile-bar__link" href="#calendario"><span data-icon="calendar"></span>Mesas y fechas</a></li>
+        <li><a class="profile-bar__link" href="#tramites" data-procedure-icon="diploma"><span data-icon="graduation"></span>Egresados</a></li>
+        <li><a class="profile-bar__link" href="#institucional"><span data-icon="building"></span>Institucional</a></li>
+        <li><a class="profile-bar__link" href="#novedades"><span data-icon="newspaper"></span>Novedades</a></li>
+      </ul>
+      <a class="btn btn--brand btn--sm profile-bar__cta" href="#carreras" data-preinscription>Preinscribite</a>
+    </div>
+  </nav>
+
+  <main id="contenido">
+    <h1 class="sr-only">Instituto de Educación Superior N° 11 — Formando profesionales con compromiso social</h1>
+
+    <!-- ═══ Hero: carrusel de destacados ═══ -->
+    <section class="hero" aria-roledescription="carrusel" aria-label="Destacados">
+      <div class="carousel" id="heroCarousel">
+        <div class="hero__viewport">
+          <div class="hero__track" id="heroTrack" data-track aria-live="off"></div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-controls__arrow" type="button" data-prev aria-label="Diapositiva anterior"><span data-icon="chevron-left"></span></button>
+          <div class="carousel__dots" data-dots></div>
+          <button class="carousel-controls__arrow" type="button" data-next aria-label="Diapositiva siguiente"><span data-icon="chevron-right"></span></button>
+          <button class="carousel-controls__arrow" type="button" data-pause aria-label="Pausar carrusel"><span data-icon="pause"></span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ¿Qué necesitás hacer hoy? ═══ -->
+    <section class="section section--tight" aria-labelledby="quickTitle">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="quickTitle">¿Qué necesitás hacer hoy?</h2>
+          <p class="section-sub">Los accesos más buscados por la comunidad del IES N° 11.</p>
+        </header>
+        <ul class="quick-actions">
+          <li><a class="quick-action" href="#carreras" data-preinscription><span class="quick-action__icon"><span data-icon="user-plus"></span></span>Preinscribirme</a></li>
+          <li><a class="quick-action" href="#calendario" data-calendar-tab="mesa-extraordinaria"><span class="quick-action__icon"><span data-icon="calendar"></span></span>Ver mesas de examen</a></li>
+          <li><a class="quick-action" href="#tramites" data-procedure-icon="document"><span class="quick-action__icon"><span data-icon="file-text"></span></span>Pedir constancia</a></li>
+          <li><a class="quick-action" href="#tramites" data-procedure-icon="bus"><span class="quick-action__icon"><span data-icon="bus"></span></span>Boleto BEGU</a></li>
+          <li><a class="quick-action" href="#tramites" data-procedure-icon="scholarship"><span class="quick-action__icon"><span data-icon="award"></span></span>Becas Progresar</a></li>
+          <li><button class="quick-action" type="button" data-open-chat><span class="quick-action__icon quick-action__icon--accent"><span data-icon="bot"></span></span>Consultar al asistente</button></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══ Oferta académica por área ═══ -->
+    <section class="section" id="carreras" aria-labelledby="carrerasTitle">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="carrerasTitle">Explorá nuestra propuesta por área</h2>
+          <p class="section-sub">Nuestra oferta agrupada por el área de formación que estás buscando.</p>
+        </header>
+
+        <div class="carousel" id="areasCarousel">
+          <div class="carousel__nav">
+            <button class="carousel-arrow" type="button" data-prev aria-label="Áreas anteriores"><span data-icon="chevron-left"></span></button>
+            <button class="carousel-arrow" type="button" data-next aria-label="Áreas siguientes"><span data-icon="chevron-right"></span></button>
+          </div>
+          <div class="carousel__track" id="areasTrack" data-track></div>
+          <div class="carousel__dots" data-dots></div>
+        </div>
+
+        <div class="filter-bar" id="careersList">
+          <h3 class="filter-bar__title">Todas las carreras</h3>
+          <label class="select-pill">
+            <span class="sr-only">Área</span>
+            <select class="select-pill__control" id="filterArea"><option value="all">Todas las áreas</option></select>
+            <span data-icon="chevron-down"></span>
+          </label>
+          <label class="select-pill">
+            <span class="sr-only">Modalidad</span>
+            <select class="select-pill__control" id="filterModality">
+              <option value="all">Todas las modalidades</option>
+              <option>Presencial</option>
+              <option>Semipresencial</option>
+              <option>A distancia</option>
+            </select>
+            <span data-icon="chevron-down"></span>
+          </label>
+          <label class="select-pill">
+            <span class="sr-only">Turno</span>
+            <select class="select-pill__control" id="filterShift">
+              <option value="all">Todos los turnos</option>
+              <option>Mañana</option>
+              <option>Tarde</option>
+              <option>Noche</option>
+            </select>
+            <span data-icon="chevron-down"></span>
+          </label>
+          <span class="filter-bar__count" id="careersCount" aria-live="polite"></span>
+          <button class="link-chevron" type="button" id="filtersReset" hidden>Limpiar filtros</button>
+        </div>
+
+        <div class="card-grid" id="careersGrid"></div>
+      </div>
+    </section>
+
+    <!-- ═══ Trámites frecuentes ═══ -->
+    <section class="section section--tinted" id="tramites" aria-labelledby="tramitesTitle">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="tramitesTitle">Trámites frecuentes</h2>
+          <p class="section-sub">Estado, requisitos y documentación para resolver todo antes de ir a Bedelía.</p>
+        </header>
+        <div class="card-grid" id="proceduresGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ═══ Calendario académico ═══ -->
+    <section class="section" id="calendario" aria-labelledby="calendarioTitle">
+      <div class="container container--narrow">
+        <header class="section-head">
+          <h2 class="section-title" id="calendarioTitle">Calendario académico</h2>
+          <p class="section-sub">Mesas de examen, feriados, cursillos e inscripciones, actualizados por Bedelía.</p>
+        </header>
+
+        <div class="tabs" role="tablist" aria-label="Categorías del calendario">
+          <button class="tab" type="button" role="tab" id="tab-mesa-ordinaria" data-category="mesa-ordinaria" aria-controls="calendarPanel" aria-selected="true">Mesas Ordinarias <span class="tab__count" data-count="mesa-ordinaria">0</span></button>
+          <button class="tab" type="button" role="tab" id="tab-mesa-extraordinaria" data-category="mesa-extraordinaria" aria-controls="calendarPanel" aria-selected="false" tabindex="-1">Mesas Extraordinarias <span class="tab__count" data-count="mesa-extraordinaria">0</span></button>
+          <button class="tab" type="button" role="tab" id="tab-feriado" data-category="feriado" aria-controls="calendarPanel" aria-selected="false" tabindex="-1">Feriados e Inasistencias <span class="tab__count" data-count="feriado">0</span></button>
+          <button class="tab" type="button" role="tab" id="tab-cursillo" data-category="cursillo" aria-controls="calendarPanel" aria-selected="false" tabindex="-1">Cursillos e Inscripción <span class="tab__count" data-count="cursillo">0</span></button>
+        </div>
+
+        <div id="calendarPanel" role="tabpanel" aria-labelledby="tab-mesa-ordinaria" tabindex="0"></div>
+      </div>
+    </section>
+
+    <!-- ═══ Institucional: panel dividido ═══ -->
+    <section class="section section--flush" id="institucional" aria-labelledby="institucionalTitle">
+      <div class="container-wide showcase">
+        <div class="showcase__media" id="showcaseMedia"></div>
+        <div class="showcase__panel">
+          <h2 class="showcase__eyebrow" id="institucionalTitle"><span>Conocé el IES N° 11</span></h2>
+          <div class="showcase__tabs" role="tablist" aria-label="Información institucional">
+            <button class="showcase__tab" type="button" role="tab" id="st-mision" data-showcase="mision" aria-controls="showcasePanel" aria-selected="true">Misión</button>
+            <button class="showcase__tab" type="button" role="tab" id="st-vision" data-showcase="vision" aria-controls="showcasePanel" aria-selected="false" tabindex="-1">Visión</button>
+            <button class="showcase__tab" type="button" role="tab" id="st-autoridades" data-showcase="autoridades" aria-controls="showcasePanel" aria-selected="false" tabindex="-1">Autoridades</button>
+            <button class="showcase__tab" type="button" role="tab" id="st-bedelia" data-showcase="bedelia" aria-controls="showcasePanel" aria-selected="false" tabindex="-1">Bedelía</button>
+          </div>
+          <div class="showcase__content" id="showcasePanel" role="tabpanel" aria-labelledby="st-mision" tabindex="0">
+            <p class="showcase__text">Cargando…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Novedades ═══ -->
+    <section class="section" id="novedades" aria-labelledby="novedadesTitle">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="novedadesTitle">Lo que está pasando</h2>
+          <p class="section-sub">Enterate de las novedades, jornadas y anuncios del Instituto.</p>
+        </header>
+
+        <div class="chip-row" role="group" aria-label="Filtrar novedades por categoría">
+          <button class="chip" type="button" data-news-tag="all" aria-pressed="true">Todas</button>
+          <button class="chip" type="button" data-news-tag="Académico" aria-pressed="false">Académico</button>
+          <button class="chip" type="button" data-news-tag="Institucional" aria-pressed="false">Institucional</button>
+          <button class="chip" type="button" data-news-tag="Eventos/Jornadas" aria-pressed="false">Eventos/Jornadas</button>
+        </div>
+
+        <div class="carousel news-carousel" id="newsCarousel">
+          <div class="carousel__nav">
+            <button class="carousel-arrow" type="button" data-prev aria-label="Novedades anteriores"><span data-icon="chevron-left"></span></button>
+            <button class="carousel-arrow" type="button" data-next aria-label="Novedades siguientes"><span data-icon="chevron-right"></span></button>
+          </div>
+          <div class="carousel__track" id="newsTrack" data-track aria-live="polite"></div>
+          <div class="carousel__dots" data-dots></div>
+        </div>
+
+        <div class="center-actions">
+          <button class="btn btn--outline" type="button" id="newsToggle" aria-pressed="false">Ver todas las novedades</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA final ═══ -->
+    <section class="section section--tight" aria-label="Preinscripción">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2 class="cta-band__title">¿Listo/a para empezar tu carrera?</h2>
+            <p class="cta-band__text">La preinscripción es online, gratuita y te lleva pocos minutos.</p>
+          </div>
+          <a class="btn btn--cta" href="#carreras" data-preinscription>Preinscripción Online <span data-icon="arrow-right"></span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="site-footer" id="contacto">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a class="brand brand--light" href="/">
+          <img src="/assets/logo-ies11.svg" alt="" width="52" height="52">
+          <span>
+            <span class="brand__name">IES N° 11</span>
+            <span class="brand__sub">Jujuy · Argentina</span>
+          </span>
+        </a>
+        <p class="footer__motto">Formando profesionales con compromiso social.</p>
+        <div class="footer__social" id="footerSocial"></div>
+      </div>
+
+      <div>
+        <h2 class="footer__title">El Instituto</h2>
+        <ul class="footer__list">
+          <li><a href="#institucional">Misión y visión</a></li>
+          <li><a href="#institucional" data-showcase-open="autoridades">Autoridades</a></li>
+          <li><a href="#novedades">Novedades</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="footer__title">Oferta educativa</h2>
+        <ul class="footer__list">
+          <li><a href="#carreras">Carreras</a></li>
+          <li><a href="#carreras" data-preinscription>Preinscripción</a></li>
+          <li><a href="#calendario" data-calendar-tab="cursillo">Cursillos de ingreso</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="footer__title">Estudiantes</h2>
+        <ul class="footer__list">
+          <li><a href="#tramites">Trámites</a></li>
+          <li><a href="#calendario" data-calendar-tab="mesa-ordinaria">Mesas de examen</a></li>
+          <li><a href="#calendario" data-calendar-tab="feriado">Feriados</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="footer__title">Contactanos</h2>
+        <ul class="footer__list footer__list--contact" id="footerContact"><li>Cargando…</li></ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span> Instituto de Educación Superior N° 11 · Ministerio de Educación de Jujuy</span>
+      <a href="/login">Acceso administrativo</a>
+    </div>
+  </footer>
+
+  <!-- ═══ Menú lateral ═══ -->
+  <dialog class="drawer" id="menuDrawer" aria-label="Menú principal">
+    <div class="drawer__head">
+      <a class="brand brand--light" href="/">
+        <img src="/assets/logo-ies11.svg" alt="" width="40" height="40">
+        <span class="brand__name">IES N° 11</span>
+      </a>
+      <button class="drawer__close" type="button" data-close-drawer aria-label="Cerrar menú"><span data-icon="x"></span></button>
+    </div>
+    <nav class="drawer__nav" aria-label="Secciones">
+      <ul>
+        <li><a href="#carreras">Carreras<span data-icon="chevron-right"></span></a></li>
+        <li><a href="#tramites">Trámites<span data-icon="chevron-right"></span></a></li>
+        <li><a href="#calendario">Calendario y mesas<span data-icon="chevron-right"></span></a></li>
+        <li><a href="#institucional">Institucional<span data-icon="chevron-right"></span></a></li>
+        <li><a href="#novedades">Novedades<span data-icon="chevron-right"></span></a></li>
+        <li><a href="#contacto">Contacto<span data-icon="chevron-right"></span></a></li>
+      </ul>
+    </nav>
+    <div class="drawer__footer">
+      <a class="btn btn--cta btn--block" href="#carreras" data-preinscription>Preinscripción Online</a>
+      <button class="btn btn--ghost-light btn--block" type="button" data-open-chat><span data-icon="bot"></span>Asistente virtual</button>
+      <a class="btn btn--ghost-light btn--block" href="/login"><span data-icon="lock"></span>Acceso administrativo</a>
+    </div>
+  </dialog>
+
+  <!-- ═══ Modal de detalle ═══ -->
+  <dialog class="modal" id="modal" aria-labelledby="modalTitle">
+    <button class="icon-btn modal__close" type="button" data-close-modal aria-label="Cerrar"><span data-icon="x"></span></button>
+    <div id="modalContent"></div>
+  </dialog>
+
+  <!-- ═══ Botones flotantes: WhatsApp + asistente ═══ -->
+  <div class="fab-stack">
+    <a class="fab fab--whatsapp" id="fabWhatsapp" href="#" target="_blank" rel="noopener noreferrer" aria-label="Escribinos por WhatsApp" hidden><span data-icon="whatsapp"></span></a>
+    <div class="fab-chat">
+      <p class="fab-hint" id="chatHint" hidden>¿Tenés dudas? ¡Preguntame! 👋</p>
+      <button class="fab fab--chat" id="chatToggle" type="button" aria-expanded="false" aria-controls="chatPanel" aria-label="Abrir asistente virtual">
+        <span data-icon="bot"></span><span class="fab__badge" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ Asistente virtual (chatbot) ═══ -->
+  <section class="chat" id="chatPanel" aria-labelledby="chatTitle" hidden>
+    <header class="chat__head">
+      <img class="chat__avatar" src="/assets/logo-ies11.svg" alt="" width="40" height="40">
+      <div>
+        <h2 class="chat__name" id="chatTitle">Asistente IES N° 11</h2>
+        <span class="chat__status">En línea · respuestas automáticas</span>
+      </div>
+      <button class="chat__close" type="button" id="chatClose" aria-label="Cerrar asistente"><span data-icon="x"></span></button>
+    </header>
+    <div class="chat__log" id="chatLog" role="log" aria-live="polite" aria-label="Conversación"></div>
+    <div class="chat__suggestions" id="chatSuggestions" aria-label="Preguntas sugeridas"></div>
+    <form class="chat__form" id="chatForm" autocomplete="off">
+      <label class="sr-only" for="chatInput">Escribí tu consulta</label>
+      <input class="chat__input" id="chatInput" type="text" placeholder="Escribí tu consulta…" maxlength="300">
+      <button class="chat__send" type="submit" aria-label="Enviar"><span data-icon="send"></span></button>
+    </form>
+    <p class="chat__disclaimer">Asistente automático. Para casos particulares consultá en Bedelía.</p>
+  </section>
+</body>
+</html>

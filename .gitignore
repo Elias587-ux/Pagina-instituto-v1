@@ -1,0 +1,18 @@
+# Dependencias (se generan con npm install)
+node_modules/
+
+# Configuración privada: cada integrante crea su propio .env desde .env.example
+.env
+.env.*
+!.env.example
+
+# Archivos subidos desde el panel (logos, imágenes, PDFs)
+public/uploads/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

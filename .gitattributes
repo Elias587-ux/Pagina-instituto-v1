@@ -1,0 +1,8 @@
+# Normaliza saltos de línea entre Windows, Mac y Linux
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.pdf binary

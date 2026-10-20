@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de gestión · IES N° 11</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#313E59">
+  <link rel="icon" href="/assets/logo-ies11.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script type="module" src="/js/admin.js"></script>
+</head>
+<body>
+  <div class="page-loader" id="pageLoader"><span class="spinner" role="status" aria-label="Cargando panel"></span></div>
+
+  <div class="admin-layout" id="adminApp" hidden>
+    <!-- ═══ Sidebar ═══ -->
+    <aside class="admin-sidebar">
+      <a class="brand" href="/" title="Ver sitio público">
+        <img src="/assets/logo-ies11.svg" alt="" width="40" height="40">
+        <span>
+          <span class="brand__name">IES N° 11</span>
+          <span class="brand__sub">Panel de gestión</span>
+        </span>
+      </a>
+
+      <nav aria-label="Secciones del panel">
+        <ul class="admin-nav">
+          <li><button class="admin-nav__btn" type="button" data-section="overview"><span data-icon="dashboard"></span>Resumen</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="alert"><span data-icon="megaphone"></span>Alerta urgente</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="slides"><span data-icon="dashboard"></span>Carrusel principal</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="news"><span data-icon="newspaper"></span>Noticias y Jornadas</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="calendar"><span data-icon="calendar"></span>Calendario y Mesas</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="careers"><span data-icon="graduation"></span>Carreras</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="procedures"><span data-icon="file-text"></span>Trámites</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="site"><span data-icon="settings"></span>Institucional y contacto</button></li>
+        </ul>
+      </nav>
+
+      <div class="admin-sidebar__footer">
+        <div class="admin-user">
+          <span class="admin-user__avatar" id="userAvatar" aria-hidden="true"></span>
+          <span>
+            <span class="admin-user__name" id="userName"></span>
+            <span class="admin-user__role" id="userRole"></span>
+          </span>
+        </div>
+        <button class="btn btn--ghost-light btn--sm" type="button" id="logoutBtn"><span data-icon="log-out"></span>Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <!-- ═══ Contenido ═══ -->
+    <main class="admin-main" id="adminMain">
+
+      <!-- Resumen -->
+      <section class="admin-section" data-panel="overview" aria-labelledby="overviewTitle">
+        <div class="admin-section__head">
+          <div>
+            <h1 class="admin-section__title" id="overviewTitle">Hola, <span id="greetName"></span></h1>
+            <p class="admin-section__subtitle">Resumen del contenido publicado en el portal.</p>
+          </div>
+          <a class="btn btn--outline btn--sm" href="/" target="_blank" rel="noopener"><span data-icon="external-link"></span>Ver sitio</a>
+        </div>
+        <div class="stat-cards" id="statsGrid"></div>
+        <div class="panel">
+          <h2 class="panel__title">Accesos rápidos</h2>
+          <div class="shortcut-grid">
+            <button class="btn btn--brand" type="button" data-shortcut="news"><span data-icon="plus"></span>Nueva noticia</button>
+            <button class="btn btn--brand" type="button" data-shortcut="calendar"><span data-icon="plus"></span>Nueva fecha de mesa</button>
+            <button class="btn btn--outline" type="button" data-goto="alert"><span data-icon="megaphone"></span>Editar alerta urgente</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Alerta urgente -->
+      <section class="admin-section" data-panel="alert" aria-labelledby="alertTitle" hidden>
+        <div class="admin-section__head">
+          <div>
+            <h1 class="admin-section__title" id="alertTitle">Alerta urgente</h1>
+            <p class="admin-section__subtitle">Banner que aparece arriba de todo el sitio público.</p>
+          </div>
+        </div>
+        <form class="panel" id="alertForm" novalidate>
+          <div class="form-alert" data-form-error role="alert" hidden></div>
+          <div class="form-grid">
+            <div class="field field--full">
+              <label class="check"><input type="checkbox" name="enabled"> Mostrar la alerta en el sitio</label>
+            </div>
+            <div class="field field--full">
+              <label class="field__label" for="alertMessage">Mensaje <span class="req">*</span></label>
+              <input class="input" id="alertMessage" name="message" maxlength="200" required>
+              <p class="field__error" data-error-for="alert.message" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="alertLinkText">Texto del enlace</label>
+              <input class="input" id="alertLinkText" name="linkText" maxlength="40" placeholder="Ej: Ver fechas">
+            </div>
+            <div class="field">
+              <label class="field__label" for="alertLinkUrl">URL del enlace</label>
+              <input class="input" id="alertLinkUrl" name="linkUrl" inputmode="url" placeholder="#calendario o https://…">
+              <p class="field__error" data-error-for="alert.linkUrl" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="alertLevel">Nivel</label>
+              <select class="input" id="alertLevel" name="level">
+                <option value="urgent">Urgente</option>
+                <option value="warning">Aviso</option>
+                <option value="info">Informativo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="alert-preview">
+            <span class="alert-preview__label">Vista previa</span>
+            <div class="alert-bar" id="alertPreview">
+              <div class="alert-bar__inner">
+                <span class="alert-bar__icon" data-icon="megaphone"></span>
+                <p class="alert-bar__text"></p>
+                <span class="alert-bar__link"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn--brand" type="submit">Guardar alerta</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Secciones CRUD generadas por admin.js -->
+      <div id="resourceSections"></div>
+
+      <!-- Institucional y contacto -->
+      <section class="admin-section" data-panel="site" aria-labelledby="siteTitle" hidden>
+        <div class="admin-section__head">
+          <div>
+            <h1 class="admin-section__title" id="siteTitle">Institucional y contacto</h1>
+            <p class="admin-section__subtitle">Datos del footer, enlaces y contenido del módulo institucional.</p>
+          </div>
+        </div>
+        <form id="siteForm" novalidate>
+          <div class="form-alert" data-form-error role="alert" hidden></div>
+
+          <div class="panel">
+            <h2 class="panel__title">Contacto y canales oficiales</h2>
+            <div class="form-grid">
+              <div class="field field--full">
+                <label class="field__label" for="cAddress">Dirección</label>
+                <input class="input" id="cAddress" name="contact.address" maxlength="200">
+              </div>
+              <div class="field">
+                <label class="field__label" for="cPhone">Teléfono</label>
+                <input class="input" id="cPhone" name="contact.phone" maxlength="60">
+              </div>
+              <div class="field">
+                <label class="field__label" for="cEmail">Email</label>
+                <input class="input" id="cEmail" name="contact.email" type="email" maxlength="120">
+              </div>
+              <div class="field">
+                <label class="field__label" for="cWhatsapp">WhatsApp (sólo números, con código de país)</label>
+                <input class="input" id="cWhatsapp" name="contact.whatsapp" inputmode="numeric" placeholder="5493880000000">
+                <p class="field__error" data-error-for="contact.whatsapp" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="cHours">Horarios de Bedelía</label>
+                <input class="input" id="cHours" name="contact.bedeliaHours" maxlength="200">
+              </div>
+              <div class="field">
+                <label class="field__label" for="cFacebook">Facebook (URL)</label>
+                <input class="input" id="cFacebook" name="contact.facebookUrl" inputmode="url" placeholder="https://www.facebook.com/…">
+                <p class="field__error" data-error-for="contact.facebookUrl" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="cInstagram">Instagram (URL)</label>
+                <input class="input" id="cInstagram" name="contact.instagramUrl" inputmode="url" placeholder="https://www.instagram.com/…">
+                <p class="field__error" data-error-for="contact.instagramUrl" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="cMap">Mapa (URL de Google Maps)</label>
+                <input class="input" id="cMap" name="contact.mapUrl" inputmode="url">
+                <p class="field__error" data-error-for="contact.mapUrl" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="lPre">Enlace de Preinscripción Online</label>
+                <input class="input" id="lPre" name="links.preinscriptionUrl" inputmode="url" placeholder="https://… o #carreras">
+                <p class="field__error" data-error-for="links.preinscriptionUrl" hidden></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel__title">Misión, visión y autoridades</h2>
+            <div class="form-grid">
+              <div class="field field--full">
+                <label class="field__label" for="iImage">Foto del edificio (URL)</label>
+                <input class="input" id="iImage" name="institutional.imageUrl" inputmode="url" placeholder="/assets/edificio.jpg o https://…" aria-describedby="iImageHint">
+                <small class="field__hint" id="iImageHint">Se muestra en el panel "Conocé el IES N° 11" de la portada.</small>
+                <p class="field__error" data-error-for="institutional.imageUrl" hidden></p>
+              </div>
+              <div class="field field--full">
+                <label class="field__label" for="iMission">Misión</label>
+                <textarea class="input" id="iMission" name="institutional.mission" rows="4" maxlength="3000"></textarea>
+              </div>
+              <div class="field field--full">
+                <label class="field__label" for="iVision">Visión</label>
+                <textarea class="input" id="iVision" name="institutional.vision" rows="4" maxlength="3000"></textarea>
+              </div>
+              <div class="field field--full">
+                <label class="field__label" for="iAuthorities">Jerarquía directiva y regencias</label>
+                <textarea class="input" id="iAuthorities" name="institutional.authorities" rows="6" aria-describedby="iAuthoritiesHint" placeholder="Rector/a | Nombre Apellido&#10;Regente de Profesorados | Nombre Apellido"></textarea>
+                <small class="field__hint" id="iAuthoritiesHint">Una persona por línea con el formato: <strong>Cargo | Nombre</strong></small>
+                <p class="field__error" data-error-for="institutional.authorities" hidden></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn--brand" type="submit">Guardar cambios</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- ═══ Modal editor (crear / editar) ═══ -->
+  <dialog class="modal editor-modal" id="editorModal" aria-labelledby="editorTitle">
+    <button class="icon-btn modal__close" type="button" data-close-editor aria-label="Cerrar"><span data-icon="x"></span></button>
+    <div class="editor-modal__head"><h2 id="editorTitle">Editar</h2></div>
+    <form id="editorForm" novalidate>
+      <div class="form-alert" data-form-error role="alert" hidden></div>
+      <div class="form-grid" id="editorFields"></div>
+      <div class="form-actions">
+        <button class="btn btn--ghost" type="button" data-close-editor>Cancelar</button>
+        <button class="btn btn--brand" type="submit" id="editorSubmit">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast-container" id="toasts" aria-live="polite"></div>
+</body>
+</html>

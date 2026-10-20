@@ -1,0 +1,89 @@
+/* ==========================================================================
+   IES N° 11 — Sistema de diseño (tokens)
+   Paleta institucional obligatoria + escalas de tipografía, espaciado,
+   radios y sombras. Todo el CSS del proyecto consume estas variables.
+   ========================================================================== */
+
+:root {
+  /* ─── Paleta institucional ─────────────────────────────────────────── */
+  --color-primary: #313E59;        /* Headers, topbar, footer */
+  --color-secondary: #404959;      /* Superficies secundarias, bordes oscuros, tarjetas oscuras */
+  --color-brand: #497CBF;          /* Botones generales, enlaces, hover, tabs activas */
+  --color-accent-1: #41EDD9;       /* Badges de estado, alertas secundarias, detalles */
+  --color-accent-2: #41D2F2;       /* CTA primarias, resaltados */
+  --color-bg: #F8FAFC;             /* Fondo general */
+  --color-surface: #FFFFFF;        /* Tarjetas */
+
+  /* ─── Derivados (contraste WCAG AA) ────────────────────────────────── */
+  --color-brand-strong: #3A68A6;   /* Texto/enlaces de marca sobre blanco (5.7:1) */
+  --color-brand-50: #EEF3FA;       /* Fondos suaves de marca */
+  --color-brand-100: #DCE7F5;
+  --color-accent-1-50: #E3FCF9;
+  --color-accent-2-50: #E4F8FD;
+  --color-on-accent: #13203A;      /* Texto sobre acentos cian/turquesa (> 9:1) */
+
+  --color-text: #1E2738;
+  --color-text-muted: #556079;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-on-dark: #FFFFFF;
+  --color-on-dark-muted: #C9D2E3;
+
+  --color-success: #0F7A55;
+  --color-success-50: #E3F6EE;
+  --color-danger: #B42318;
+  --color-danger-50: #FDECEA;
+  --color-warning: #8A5300;
+  --color-warning-50: #FFF4DC;
+
+  /* ─── Tipografía ───────────────────────────────────────────────────── */
+  --font-heading: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: clamp(1.75rem, 3.5vw, 2.5rem);
+  --fs-hero: clamp(2.25rem, 5.2vw, 3.75rem);
+
+  /* ─── Espaciado ────────────────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 88px;
+
+  /* ─── Forma y profundidad ──────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(19, 32, 58, 0.06), 0 1px 3px rgba(19, 32, 58, 0.08);
+  --shadow-md: 0 6px 16px rgba(19, 32, 58, 0.08);
+  --shadow-lg: 0 18px 40px rgba(19, 32, 58, 0.14);
+  --shadow-pill: 0 3px 10px rgba(19, 32, 58, 0.16);   /* píldoras flotantes estilo Siglo 21 */
+  --shadow-soft: 0 2px 14px rgba(19, 32, 58, 0.08);   /* tarjetas */
+
+  /* ─── Layout ───────────────────────────────────────────────────────── */
+  --container: 1200px;
+  --container-wide: 1400px;
+  --header-h: 72px;
+
+  --z-header: 50;
+  --z-dropdown: 60;
+  --z-fab: 90;
+  --z-chat: 95;
+  --z-toast: 100;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --transition: 180ms var(--ease);
+}
