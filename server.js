@@ -61,7 +61,17 @@ app.use(express.json({ limit: '200kb' }));
 app.use(morgan(isProd ? 'combined' : 'dev'));
 
 // ─── Estáticos, API y vistas ─────────────────────────────────────────
-app.use(express.static(path.join(__dirname, 'public'), { index: false, maxAge: isProd ? '7d' : 0 }));
+app.use(
+  express.static(path.join(__dirname, 'public'), {
+    index: false,
+    maxAge: isProd ? '7d' : 0,
+    // Code must update right after each deploy: browsers revalidate JS/CSS with the
+    // ETag (cheap 304 when unchanged). Images and other assets keep the long cache.
+    setHeaders: (res, filePath) => {
+      if (/\.(js|css|html)$/i.test(filePath)) res.setHeader('Cache-Control', 'no-cache');
+    },
+  })
+);
 app.use('/api', apiRoutes);
 app.use('/', viewRoutes);
 
