@@ -13,8 +13,9 @@ const HINT_KEY = 'ies11_chat_hint_seen';
 const MAX_HISTORY = 40;
 
 const WELCOME = {
-  text: '¡Hola! 👋 Soy el asistente virtual del IES N° 11.\nTe puedo ayudar con carreras, preinscripción, mesas de examen, trámites y horarios de Bedelía. ¿Qué necesitás?',
-  suggestions: ['¿Qué carreras hay?', 'Próximas mesas de examen', '¿Cómo me preinscribo?', 'Requisitos del BEGU', 'Horarios de Bedelía'],
+  text: '¡Hola! 👋 Soy el asistente virtual del IES N° 11.\nTe puedo ayudar con carreras, preinscripción, mesas y tribunales, trámites (títulos, permisos, BEGU, Progresar), fechas y horarios. ¿Qué necesitás?',
+  // Keep in sync with DEFAULT_SUGGESTIONS in controllers/chatController.js
+  suggestions: ['¿Qué carreras hay?', '¿Cómo me preinscribo?', 'Próximas mesas de examen', 'Permisos de examen', 'Retiro de títulos'],
 };
 
 export function initChatbot() {
