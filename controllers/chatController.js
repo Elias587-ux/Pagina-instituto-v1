@@ -116,6 +116,7 @@ async function replyCalendar(categories, intro, emptyText) {
 function replyProcedure(p) {
   const open = p.status === 'abierto';
   const links = [];
+  if (p.linkUrl && p.status === 'abierto') links.push({ label: p.linkLabel || 'Inscribirme online', href: p.linkUrl });
   if (p.downloadUrl) links.push({ label: p.downloadLabel || 'Descargar requisitos', href: p.downloadUrl });
   links.push({ label: 'Ver trámites', href: '#tramites' });
   return {
@@ -150,6 +151,7 @@ function replyContact(settings) {
   const links = [];
   const wa = String(c.whatsapp || '').replace(/\D/g, '');
   if (wa) links.push({ label: 'Escribir por WhatsApp', href: `https://wa.me/${wa}` });
+  if (c.whatsappChannelUrl) links.push({ label: 'Canal de WhatsApp', href: c.whatsappChannelUrl });
   if (c.mapUrl) links.push({ label: 'Ver mapa', href: c.mapUrl });
   links.push({ label: 'Contacto', href: '#contacto' });
   return {

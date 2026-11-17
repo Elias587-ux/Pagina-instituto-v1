@@ -13,6 +13,10 @@ public/uploads/
 *.log
 npm-debug.log*
 
+# Internal docs with sensitive data (kept local only)
+README.md
+GUIA.md
+
 # Sistema operativo
 .DS_Store
 Thumbs.db

@@ -29,6 +29,9 @@ const procedureSchema = new mongoose.Schema(
     },
     downloadUrl: urlField('Descarga'),
     downloadLabel: { type: String, trim: true, default: '', maxlength: 60 },
+    // Online form of the procedure (e.g. Becas Progresar, BEGU), like the preinscription link
+    linkUrl: urlField('Link del trámite'),
+    linkLabel: { type: String, trim: true, default: '', maxlength: 60 },
     schedule: { type: String, trim: true, default: '', maxlength: 160 },
     order: { type: Number, default: 0 },
   },

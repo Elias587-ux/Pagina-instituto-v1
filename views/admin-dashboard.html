@@ -36,9 +36,15 @@
           <li><button class="admin-nav__btn" type="button" data-section="alert"><span data-icon="megaphone"></span>Alerta urgente</button></li>
           <li><button class="admin-nav__btn" type="button" data-section="slides"><span data-icon="dashboard"></span>Carrusel principal</button></li>
           <li><button class="admin-nav__btn" type="button" data-section="news"><span data-icon="newspaper"></span>Noticias y Jornadas</button></li>
-          <li><button class="admin-nav__btn" type="button" data-section="calendar"><span data-icon="calendar"></span>Calendario y Mesas</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="calendar"><span data-icon="calendar"></span>Calendario y fechas</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="examBoards"><span data-icon="users"></span>Mesas de examen</button></li>
           <li><button class="admin-nav__btn" type="button" data-section="careers"><span data-icon="graduation"></span>Carreras</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="preinscription"><span data-icon="user-plus"></span>Preinscripción</button></li>
           <li><button class="admin-nav__btn" type="button" data-section="procedures"><span data-icon="file-text"></span>Trámites</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="inquiries"><span data-icon="inbox"></span>Consultas<span class="admin-nav__count" id="inquiriesCount" hidden></span></button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="gallery"><span data-icon="image"></span>Vida institucional</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="testimonials"><span data-icon="message-circle"></span>Testimonios</button></li>
+          <li><button class="admin-nav__btn" type="button" data-section="home"><span data-icon="image"></span>Fotos de la portada</button></li>
           <li><button class="admin-nav__btn" type="button" data-section="site"><span data-icon="settings"></span>Institucional y contacto</button></li>
         </ul>
       </nav>
@@ -60,19 +66,43 @@
 
       <!-- Resumen -->
       <section class="admin-section" data-panel="overview" aria-labelledby="overviewTitle">
-        <div class="admin-section__head">
-          <div>
-            <h1 class="admin-section__title" id="overviewTitle">Hola, <span id="greetName"></span></h1>
-            <p class="admin-section__subtitle">Resumen del contenido publicado en el portal.</p>
+        <div class="dash-hero">
+          <div class="dash-hero__head">
+            <div>
+              <p class="dash-hero__eyebrow" id="dashToday"></p>
+              <h1 class="dash-hero__title" id="overviewTitle">Hola, <span id="greetName"></span></h1>
+              <p class="dash-hero__sub">Resumen del contenido publicado en el portal.</p>
+            </div>
+            <a class="btn btn--ghost-light btn--sm" href="/" target="_blank" rel="noopener"><span data-icon="external-link"></span>Ver sitio</a>
           </div>
-          <a class="btn btn--outline btn--sm" href="/" target="_blank" rel="noopener"><span data-icon="external-link"></span>Ver sitio</a>
+          <div class="stat-cards" id="statsGrid"></div>
         </div>
-        <div class="stat-cards" id="statsGrid"></div>
+
+        <div class="panel dash-cal">
+          <div class="dash-cal__head">
+            <h2 class="panel__title" id="dashCalTitle">Calendario</h2>
+            <div class="dash-cal__nav">
+              <button class="icon-btn" type="button" data-cal-step="-1" aria-label="Mes anterior"><span data-icon="chevron-left"></span></button>
+              <button class="btn btn--ghost btn--sm" type="button" data-cal-today>Hoy</button>
+              <button class="icon-btn" type="button" data-cal-step="1" aria-label="Mes siguiente"><span data-icon="chevron-right"></span></button>
+            </div>
+            <button class="btn btn--outline btn--sm" type="button" data-goto="calendar"><span data-icon="calendar"></span>Abrir calendario</button>
+          </div>
+          <div class="dash-cal__body">
+            <div class="dash-cal__grid" id="dashCalGrid" role="grid" aria-labelledby="dashCalTitle"></div>
+            <div>
+              <h3 class="dash-cal__list-title">Fechas del mes</h3>
+              <ul class="dash-cal__list" id="dashCalList"></ul>
+            </div>
+          </div>
+        </div>
+
         <div class="panel">
           <h2 class="panel__title">Accesos rápidos</h2>
           <div class="shortcut-grid">
             <button class="btn btn--brand" type="button" data-shortcut="news"><span data-icon="plus"></span>Nueva noticia</button>
-            <button class="btn btn--brand" type="button" data-shortcut="calendar"><span data-icon="plus"></span>Nueva fecha de mesa</button>
+            <button class="btn btn--brand" type="button" data-shortcut="examBoards"><span data-icon="plus"></span>Nueva mesa de examen</button>
+            <button class="btn btn--brand" type="button" data-shortcut="calendar"><span data-icon="plus"></span>Nueva fecha en calendario</button>
             <button class="btn btn--outline" type="button" data-goto="alert"><span data-icon="megaphone"></span>Editar alerta urgente</button>
           </div>
         </div>
@@ -136,6 +166,76 @@
       <!-- Secciones CRUD generadas por admin.js -->
       <div id="resourceSections"></div>
 
+      <!-- Preinscripción -->
+      <section class="admin-section" data-panel="preinscription" aria-labelledby="preTitle" hidden>
+        <div class="admin-section__head">
+          <div>
+            <h1 class="admin-section__title" id="preTitle">Preinscripción</h1>
+            <p class="admin-section__subtitle">Ventana que se abre al tocar "Preinscribirme" en cualquier parte del sitio.</p>
+          </div>
+        </div>
+        <div class="with-preview">
+          <form id="preForm" novalidate>
+            <div class="form-alert" data-form-error role="alert" hidden></div>
+
+            <div class="panel">
+              <h2 class="panel__title">Información general</h2>
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field__label" for="pTitle">Título</label>
+                  <input class="input" id="pTitle" name="preinscription.title" maxlength="100" placeholder="Preinscripción online">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="pPeriod">Período</label>
+                  <input class="input" id="pPeriod" name="preinscription.period" maxlength="150" placeholder="Ej: Del 1 de noviembre al 20 de diciembre">
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="pIntro">Texto de presentación</label>
+                  <textarea class="input" id="pIntro" name="preinscription.intro" rows="3" maxlength="1000"></textarea>
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="pSteps">Pasos a seguir</label>
+                  <textarea class="input" id="pSteps" name="preinscription.steps" rows="4" aria-describedby="pStepsHint"></textarea>
+                  <small class="field__hint" id="pStepsHint">Un paso por línea, en orden.</small>
+                  <p class="field__error" data-error-for="preinscription.steps" hidden></p>
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="pReqs">Documentación requerida</label>
+                  <textarea class="input" id="pReqs" name="preinscription.requirements" rows="5" aria-describedby="pReqsHint"></textarea>
+                  <small class="field__hint" id="pReqsHint">Un requisito por línea.</small>
+                  <p class="field__error" data-error-for="preinscription.requirements" hidden></p>
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="pNote">Nota destacada</label>
+                  <input class="input" id="pNote" name="preinscription.note" maxlength="500" placeholder="Ej: Los cupos son limitados por turno.">
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h2 class="panel__title">Formulario online</h2>
+              <div class="form-grid">
+                <div class="field">
+                  <label class="field__label" for="lPre">Enlace del formulario</label>
+                  <input class="input" id="lPre" name="links.preinscriptionUrl" inputmode="url" placeholder="https://forms.gle/…" aria-describedby="lPreHint">
+                  <small class="field__hint" id="lPreHint">Si lo dejás vacío, la ventana no muestra el botón del formulario.</small>
+                  <p class="field__error" data-error-for="links.preinscriptionUrl" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="pButton">Texto del botón</label>
+                  <input class="input" id="pButton" name="preinscription.buttonText" maxlength="40" placeholder="Completar formulario">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--brand" type="submit">Guardar cambios</button>
+            </div>
+          </form>
+          <aside class="with-preview__aside" id="prePreview" aria-label="Vista previa de la preinscripción"></aside>
+        </div>
+      </section>
+
       <!-- Institucional y contacto -->
       <section class="admin-section" data-panel="site" aria-labelledby="siteTitle" hidden>
         <div class="admin-section__head">
@@ -144,86 +244,134 @@
             <p class="admin-section__subtitle">Datos del footer, enlaces y contenido del módulo institucional.</p>
           </div>
         </div>
-        <form id="siteForm" novalidate>
-          <div class="form-alert" data-form-error role="alert" hidden></div>
+        <div class="with-preview">
+          <form id="siteForm" novalidate>
+            <div class="form-alert" data-form-error role="alert" hidden></div>
 
-          <div class="panel">
-            <h2 class="panel__title">Contacto y canales oficiales</h2>
-            <div class="form-grid">
-              <div class="field field--full">
-                <label class="field__label" for="cAddress">Dirección</label>
-                <input class="input" id="cAddress" name="contact.address" maxlength="200">
-              </div>
-              <div class="field">
-                <label class="field__label" for="cPhone">Teléfono</label>
-                <input class="input" id="cPhone" name="contact.phone" maxlength="60">
-              </div>
-              <div class="field">
-                <label class="field__label" for="cEmail">Email</label>
-                <input class="input" id="cEmail" name="contact.email" type="email" maxlength="120">
-              </div>
-              <div class="field">
-                <label class="field__label" for="cWhatsapp">WhatsApp (sólo números, con código de país)</label>
-                <input class="input" id="cWhatsapp" name="contact.whatsapp" inputmode="numeric" placeholder="5493880000000">
-                <p class="field__error" data-error-for="contact.whatsapp" hidden></p>
-              </div>
-              <div class="field">
-                <label class="field__label" for="cHours">Horarios de Bedelía</label>
-                <input class="input" id="cHours" name="contact.bedeliaHours" maxlength="200">
-              </div>
-              <div class="field">
-                <label class="field__label" for="cFacebook">Facebook (URL)</label>
-                <input class="input" id="cFacebook" name="contact.facebookUrl" inputmode="url" placeholder="https://www.facebook.com/…">
-                <p class="field__error" data-error-for="contact.facebookUrl" hidden></p>
-              </div>
-              <div class="field">
-                <label class="field__label" for="cInstagram">Instagram (URL)</label>
-                <input class="input" id="cInstagram" name="contact.instagramUrl" inputmode="url" placeholder="https://www.instagram.com/…">
-                <p class="field__error" data-error-for="contact.instagramUrl" hidden></p>
-              </div>
-              <div class="field">
-                <label class="field__label" for="cMap">Mapa (URL de Google Maps)</label>
-                <input class="input" id="cMap" name="contact.mapUrl" inputmode="url">
-                <p class="field__error" data-error-for="contact.mapUrl" hidden></p>
-              </div>
-              <div class="field">
-                <label class="field__label" for="lPre">Enlace de Preinscripción Online</label>
-                <input class="input" id="lPre" name="links.preinscriptionUrl" inputmode="url" placeholder="https://… o #carreras">
-                <p class="field__error" data-error-for="links.preinscriptionUrl" hidden></p>
+            <div class="panel">
+              <h2 class="panel__title">Contacto y canales oficiales</h2>
+              <div class="form-grid">
+                <div class="field field--full">
+                  <label class="field__label" for="cAddress">Dirección</label>
+                  <input class="input" id="cAddress" name="contact.address" maxlength="200">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cPhone">Teléfono</label>
+                  <input class="input" id="cPhone" name="contact.phone" maxlength="60">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cEmail">Email</label>
+                  <input class="input" id="cEmail" name="contact.email" type="email" maxlength="120">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cWhatsapp">WhatsApp (sólo números, con código de país)</label>
+                  <input class="input" id="cWhatsapp" name="contact.whatsapp" inputmode="numeric" placeholder="5493880000000">
+                  <p class="field__error" data-error-for="contact.whatsapp" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cWhatsappChannel">Canal de WhatsApp (URL)</label>
+                  <input class="input" id="cWhatsappChannel" name="contact.whatsappChannelUrl" inputmode="url" placeholder="https://whatsapp.com/channel/…">
+                  <p class="field__error" data-error-for="contact.whatsappChannelUrl" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cHours">Horarios de Bedelía</label>
+                  <input class="input" id="cHours" name="contact.bedeliaHours" maxlength="200">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cFacebook">Facebook (URL)</label>
+                  <input class="input" id="cFacebook" name="contact.facebookUrl" inputmode="url" placeholder="https://www.facebook.com/…">
+                  <p class="field__error" data-error-for="contact.facebookUrl" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cInstagram">Instagram (URL)</label>
+                  <input class="input" id="cInstagram" name="contact.instagramUrl" inputmode="url" placeholder="https://www.instagram.com/…">
+                  <p class="field__error" data-error-for="contact.instagramUrl" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cMap">Mapa (URL de Google Maps)</label>
+                  <input class="input" id="cMap" name="contact.mapUrl" inputmode="url" aria-describedby="cMapHint" placeholder="https://www.google.com/maps/embed?pb=…">
+                  <small class="field__hint" id="cMapHint">Opcional. Si lo dejás vacío, el mapa del sitio busca la dirección. Para fijar el punto exacto: Google Maps → Compartir → Insertar un mapa → copiá sólo el link que está en src="…".</small>
+                  <p class="field__error" data-error-for="contact.mapUrl" hidden></p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="panel">
-            <h2 class="panel__title">Misión, visión y autoridades</h2>
-            <div class="form-grid">
-              <div class="field field--full">
-                <label class="field__label" for="iImage">Foto del edificio (URL)</label>
-                <input class="input" id="iImage" name="institutional.imageUrl" inputmode="url" placeholder="/assets/edificio.jpg o https://…" aria-describedby="iImageHint">
-                <small class="field__hint" id="iImageHint">Se muestra en el panel "Conocé el IES N° 11" de la portada.</small>
-                <p class="field__error" data-error-for="institutional.imageUrl" hidden></p>
-              </div>
-              <div class="field field--full">
-                <label class="field__label" for="iMission">Misión</label>
-                <textarea class="input" id="iMission" name="institutional.mission" rows="4" maxlength="3000"></textarea>
-              </div>
-              <div class="field field--full">
-                <label class="field__label" for="iVision">Visión</label>
-                <textarea class="input" id="iVision" name="institutional.vision" rows="4" maxlength="3000"></textarea>
-              </div>
-              <div class="field field--full">
-                <label class="field__label" for="iAuthorities">Jerarquía directiva y regencias</label>
-                <textarea class="input" id="iAuthorities" name="institutional.authorities" rows="6" aria-describedby="iAuthoritiesHint" placeholder="Rector/a | Nombre Apellido&#10;Regente de Profesorados | Nombre Apellido"></textarea>
-                <small class="field__hint" id="iAuthoritiesHint">Una persona por línea con el formato: <strong>Cargo | Nombre</strong></small>
-                <p class="field__error" data-error-for="institutional.authorities" hidden></p>
+            <div class="panel">
+              <h2 class="panel__title">Números destacados de la portada</h2>
+              <div class="form-grid">
+                <div class="field field--full">
+                  <label class="field__label" for="hStats">Números</label>
+                  <textarea class="input" id="hStats" name="highlights.stats" rows="4" aria-describedby="hStatsHint" placeholder="+30 | Años formando profesionales&#10;+2000 | Egresados y egresadas&#10;100% | Gratuita y pública"></textarea>
+                  <small class="field__hint" id="hStatsHint">Uno por línea con el formato: <strong>Número | Descripción</strong>. Ideal 3 o 4. Si lo dejás vacío se muestran la cantidad de carreras y áreas.</small>
+                  <p class="field__error" data-error-for="highlights.stats" hidden></p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="form-actions">
-            <button class="btn btn--brand" type="submit">Guardar cambios</button>
+            <div class="panel">
+              <h2 class="panel__title">Misión, visión y autoridades</h2>
+              <div class="form-grid">
+                <div class="field field--full">
+                  <label class="field__label" for="iImage">Foto del edificio (URL)</label>
+                  <input class="input" id="iImage" name="institutional.imageUrl" inputmode="url" placeholder="/assets/edificio.jpg o https://…" aria-describedby="iImageHint">
+                  <small class="field__hint" id="iImageHint">Se muestra en el panel "Conocé el IES N° 11" de la portada.</small>
+                  <p class="field__error" data-error-for="institutional.imageUrl" hidden></p>
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="iMission">Misión</label>
+                  <textarea class="input" id="iMission" name="institutional.mission" rows="4" maxlength="3000"></textarea>
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="iVision">Visión</label>
+                  <textarea class="input" id="iVision" name="institutional.vision" rows="4" maxlength="3000"></textarea>
+                </div>
+                <div class="field field--full">
+                  <label class="field__label" for="iAuthorities">Jerarquía directiva y regencias</label>
+                  <textarea class="input" id="iAuthorities" name="institutional.authorities" rows="6" aria-describedby="iAuthoritiesHint" placeholder="Rector/a | Nombre Apellido&#10;Regente de Profesorados | Nombre Apellido"></textarea>
+                  <small class="field__hint" id="iAuthoritiesHint">Una persona por línea con el formato: <strong>Cargo | Nombre</strong></small>
+                  <p class="field__error" data-error-for="institutional.authorities" hidden></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--brand" type="submit">Guardar cambios</button>
+            </div>
+          </form>
+          <aside class="with-preview__aside" id="sitePreview" aria-label="Vista previa del sitio"></aside>
+        </div>
+      </section>
+
+      <!-- Fotos de la portada (campos de subida generados por admin.js) -->
+      <section class="admin-section" data-panel="home" aria-labelledby="homeTitle" hidden>
+        <div class="admin-section__head">
+          <div>
+            <h1 class="admin-section__title" id="homeTitle">Fotos de la portada</h1>
+            <p class="admin-section__subtitle">Fotos de las tarjetas "Elegí tu camino" y del bloque "¿Cuál va a ser tu próximo paso?" del inicio. Si dejás una vacía, se usa una foto de las carreras, de Vida institucional o del edificio; sin fotos se muestra el arte institucional.</p>
           </div>
-        </form>
+        </div>
+        <div class="with-preview">
+          <form id="homeForm" novalidate>
+            <div class="form-alert" data-form-error role="alert" hidden></div>
+
+            <div class="panel">
+              <h2 class="panel__title">Elegí tu camino</h2>
+              <p class="panel__hint">Formato vertical (ej: 800×1000 px). El título y las opciones se muestran encima de la foto.</p>
+              <div class="form-grid" id="homePathFields"></div>
+            </div>
+
+            <div class="panel">
+              <h2 class="panel__title">¿Cuál va a ser tu próximo paso?</h2>
+              <p class="panel__hint">Formato horizontal (ej: 1200×800 px).</p>
+              <div class="form-grid" id="homeNextStepFields"></div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--brand" type="submit">Guardar cambios</button>
+            </div>
+          </form>
+          <aside class="with-preview__aside" id="homePreview" aria-label="Vista previa de la portada"></aside>
+        </div>
       </section>
     </main>
   </div>
@@ -231,15 +379,42 @@
   <!-- ═══ Modal editor (crear / editar) ═══ -->
   <dialog class="modal editor-modal" id="editorModal" aria-labelledby="editorTitle">
     <button class="icon-btn modal__close" type="button" data-close-editor aria-label="Cerrar"><span data-icon="x"></span></button>
-    <div class="editor-modal__head"><h2 id="editorTitle">Editar</h2></div>
-    <form id="editorForm" novalidate>
-      <div class="form-alert" data-form-error role="alert" hidden></div>
-      <div class="form-grid" id="editorFields"></div>
-      <div class="form-actions">
-        <button class="btn btn--ghost" type="button" data-close-editor>Cancelar</button>
-        <button class="btn btn--brand" type="submit" id="editorSubmit">Guardar</button>
-      </div>
-    </form>
+    <div class="editor-modal__head">
+      <h2 id="editorTitle">Editar</h2>
+      <button class="btn btn--outline btn--sm" type="button" id="previewToggle" aria-pressed="false"><span data-icon="eye"></span>Vista previa</button>
+    </div>
+    <div class="editor-modal__layout">
+      <form id="editorForm" novalidate>
+        <div class="form-alert" data-form-error role="alert" hidden></div>
+        <div class="form-grid" id="editorFields"></div>
+        <div class="form-actions">
+          <button class="btn btn--ghost" type="button" data-close-editor>Cancelar</button>
+          <button class="btn btn--brand" type="submit" id="editorSubmit">Guardar</button>
+        </div>
+      </form>
+      <div class="editor-modal__preview" id="editorPreview"></div>
+    </div>
+  </dialog>
+
+  <!-- ═══ Responder una consulta (se envía al correo de la persona) ═══ -->
+  <dialog class="modal reply-modal" id="replyModal" aria-labelledby="replyTitle">
+    <button class="icon-btn modal__close" type="button" data-close-reply aria-label="Cerrar"><span data-icon="x"></span></button>
+    <div class="reply-modal__body">
+      <h2 id="replyTitle">Responder consulta</h2>
+      <div class="reply-thread" id="replyThread"></div>
+      <form id="replyForm" novalidate>
+        <div class="form-alert" data-form-error role="alert" hidden></div>
+        <div class="field field--full">
+          <label class="field__label" for="replyMessage">Tu respuesta <span class="req">*</span></label>
+          <textarea class="input" id="replyMessage" name="message" rows="7" maxlength="4000" required></textarea>
+          <small class="field__hint" id="replyHint">Se envía al correo de la persona con tu consulta citada debajo.</small>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn--ghost" type="button" data-close-reply>Cancelar</button>
+          <button class="btn btn--brand" type="submit" id="replySubmit"><span data-icon="send"></span>Enviar respuesta</button>
+        </div>
+      </form>
+    </div>
   </dialog>
 
   <div class="toast-container" id="toasts" aria-live="polite"></div>

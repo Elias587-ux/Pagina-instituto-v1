@@ -5,11 +5,17 @@
 const mongoose = require('mongoose');
 const { toJSONOptions } = require('../utils/validators');
 
+// Keep in sync with CALENDAR_CATEGORIES in public/js/main.js and public/js/admin.js.
 const CATEGORIES = {
   'mesa-ordinaria': 'Mesas Ordinarias',
   'mesa-extraordinaria': 'Mesas Extraordinarias',
   feriado: 'Feriados e Inasistencias',
   cursillo: 'Cursillos e Inscripción',
+  inscripcion: 'Inscripciones',
+  'inicio-clases': 'Inicio de clases',
+  evento: 'Eventos',
+  capacitacion: 'Capacitaciones',
+  'fecha-importante': 'Fechas importantes',
 };
 const SHIFTS = ['Mañana', 'Tarde', 'Noche', 'Todo el día'];
 const STATUSES = ['programado', 'abierto', 'cerrado', 'finalizado'];

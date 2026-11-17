@@ -10,6 +10,10 @@ const CalendarEvent = require('../models/CalendarEvent');
 const Procedure = require('../models/Procedure');
 const Setting = require('../models/Setting');
 const Slide = require('../models/Slide');
+const Testimonial = require('../models/Testimonial');
+const ExamBoard = require('../models/ExamBoard');
+const GalleryItem = require('../models/GalleryItem');
+const Inquiry = require('../models/Inquiry');
 const AppError = require('../utils/AppError');
 const asyncHandler = require('../utils/asyncHandler');
 const { startOfTodayUTC } = require('../utils/query');
@@ -19,12 +23,16 @@ const RESOURCES = {
   news: { Model: News, sort: { date: -1 }, label: 'Noticia' },
   careers: { Model: Career, sort: { order: 1, name: 1 }, label: 'Carrera' },
   calendar: { Model: CalendarEvent, sort: { date: -1 }, label: 'Evento' },
+  examBoards: { Model: ExamBoard, sort: { date: -1, time: 1, career: 1 }, label: 'Mesa' },
   procedures: { Model: Procedure, sort: { order: 1, title: 1 }, label: 'Trámite' },
   slides: { Model: Slide, sort: { order: 1, createdAt: 1 }, label: 'Diapositiva' },
+  testimonials: { Model: Testimonial, sort: { order: 1, createdAt: 1 }, label: 'Testimonio' },
+  gallery: { Model: GalleryItem, sort: { order: 1, date: -1 }, label: 'Publicación' },
+  inquiries: { Model: Inquiry, sort: { createdAt: -1 }, label: 'Consulta' },
 };
 
 const PROTECTED_FIELDS = new Set(['_id', '__v', 'createdAt', 'updatedAt']);
-const SETTINGS_SECTIONS = ['alert', 'contact', 'links', 'institutional'];
+const SETTINGS_SECTIONS = ['alert', 'contact', 'links', 'preinscription', 'highlights', 'institutional', 'home'];
 
 const getResource = (name) => {
   const resource = RESOURCES[name];
@@ -52,7 +60,7 @@ const findOr404 = async (Model, id, label) => {
 /** GET /api/admin/stats */
 exports.stats = asyncHandler(async (_req, res) => {
   const today = startOfTodayUTC();
-  const [news, published, careers, procedures, openProcedures, events, upcomingExams] = await Promise.all([
+  const [news, published, careers, procedures, openProcedures, events, upcomingExams, newInquiries] = await Promise.all([
     News.countDocuments(),
     News.countDocuments({ published: true }),
     Career.countDocuments({ active: true }),
@@ -63,8 +71,9 @@ exports.stats = asyncHandler(async (_req, res) => {
       date: { $gte: today },
       category: { $in: ['mesa-ordinaria', 'mesa-extraordinaria'] },
     }),
+    Inquiry.countDocuments({ status: 'nueva' }),
   ]);
-  res.json({ news, published, careers, procedures, openProcedures, events, upcomingExams });
+  res.json({ news, published, careers, procedures, openProcedures, events, upcomingExams, newInquiries });
 });
 
 /** GET /api/admin/:resource — listado completo (incluye borradores e inactivos). */

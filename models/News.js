@@ -28,6 +28,7 @@ const newsSchema = new mongoose.Schema(
     },
     date: { type: Date, required: [true, 'La fecha es obligatoria'], default: Date.now },
     imageUrl: urlField('Imagen'),
+    videoUrl: urlField('Video'),
     published: { type: Boolean, default: true },
     featured: { type: Boolean, default: false },
   },

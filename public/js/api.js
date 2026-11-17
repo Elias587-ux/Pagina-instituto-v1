@@ -39,7 +39,9 @@ const toQuery = (params = {}) => {
  */
 async function request(path, { method = 'GET', body, withAuth = false, signal } = {}) {
   const headers = { Accept: 'application/json' };
-  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  // Los archivos (Blob/File) viajan como binario con su propio tipo; el resto, como JSON.
+  const isFile = body instanceof Blob;
+  if (body !== undefined) headers['Content-Type'] = isFile ? body.type || 'application/octet-stream' : 'application/json';
   if (withAuth) {
     const token = auth.getToken();
     if (token) headers.Authorization = `Bearer ${token}`;
@@ -50,7 +52,7 @@ async function request(path, { method = 'GET', body, withAuth = false, signal } 
     response = await fetch(`${BASE}${path}`, {
       method,
       headers,
-      body: body !== undefined ? JSON.stringify(body) : undefined,
+      body: body === undefined || isFile ? body : JSON.stringify(body),
       signal,
     });
   } catch (err) {
@@ -77,8 +79,12 @@ export const api = {
   career: (id) => request(`/careers/${encodeURIComponent(id)}`),
   calendar: (params) => request(`/calendar${toQuery(params)}`),
   procedures: () => request('/procedures'),
+  examBoards: () => request('/exam-boards'),
   search: (q, signal) => request(`/search${toQuery({ q })}`, { signal }),
   slides: () => request('/slides'),
+  testimonials: () => request('/testimonials'),
+  gallery: () => request('/gallery'),
+  contact: (data) => request('/contact', { method: 'POST', body: data }),
   chat: (message) => request('/chat', { method: 'POST', body: { message } }),
 
   // ─── Autenticación ───
@@ -94,6 +100,11 @@ export const api = {
       request(`/admin/${resource}/${encodeURIComponent(id)}`, { method: 'PUT', body: data, withAuth: true }),
     remove: (resource, id) =>
       request(`/admin/${resource}/${encodeURIComponent(id)}`, { method: 'DELETE', withAuth: true }),
+    replyInquiry: (id, message) =>
+      request(`/admin/inquiries/${encodeURIComponent(id)}/reply`, { method: 'POST', body: { message }, withAuth: true }),
+    importGoogleReviews: () => request('/admin/testimonials/import-google', { method: 'POST', withAuth: true }),
     saveSettings: (data) => request('/admin/settings', { method: 'PUT', body: data, withAuth: true }),
+    /** @param {File} file @param {'logo'|'image'|'pdf'} kind @param {string} [name] nombre sugerido para el archivo */
+    upload: (file, kind, name) => request(`/admin/uploads${toQuery({ kind, name })}`, { method: 'POST', body: file, withAuth: true }),
   },
 };

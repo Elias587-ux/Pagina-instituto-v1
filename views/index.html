@@ -6,9 +6,19 @@
   <title>IES N° 11 · Formando profesionales con compromiso social</title>
   <meta name="description" content="Instituto de Educación Superior N° 11 de Jujuy. Carreras, preinscripción, trámites estudiantiles, mesas de examen, calendario académico y novedades.">
   <meta name="theme-color" content="#313E59">
+  <!-- Vista previa al compartir (WhatsApp, Facebook, X). {{SITE_URL}} lo completa el servidor. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IES N° 11 Jujuy">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:url" content="{{SITE_URL}}/">
   <meta property="og:title" content="IES N° 11 · Formando profesionales con compromiso social">
-  <meta property="og:description" content="Carreras, trámites, calendario académico y novedades del Instituto de Educación Superior N° 11.">
-  <meta property="og:image" content="/assets/logo-ies11.svg">
+  <meta property="og:description" content="Tecnicaturas superiores con título oficial en Jujuy. Preinscripción online, trámites, calendario académico y novedades del Instituto.">
+  <meta property="og:image" content="{{SITE_URL}}/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="IES N° 11 — Formando profesionales con compromiso social">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{SITE_URL}}/">
   <link rel="icon" href="/assets/logo-ies11.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,8 +61,7 @@
       </form>
 
       <div class="header-actions">
-        <a class="btn btn--brand header-actions__cta" href="#carreras" data-preinscription>Preinscribite</a>
-        <a class="pill-btn pill-btn--icon" href="/login" aria-label="Acceso administrativo" title="Acceso administrativo"><span data-icon="user"></span></a>
+        <a class="btn btn--brand header-actions__cta" href="/ingresantes#carreras" data-preinscription>Preinscribite</a>
         <button class="pill-btn" type="button" id="menuOpen" aria-haspopup="dialog" aria-controls="menuDrawer">
           <span class="pill-btn__label">MENÚ</span><span data-icon="menu"></span>
         </button>
@@ -63,27 +72,50 @@
   <!-- ═══ Barra de perfiles (flotante y fija al hacer scroll) ═══ -->
   <nav class="profile-bar" id="profileBar" aria-label="Accesos por perfil">
     <div class="profile-bar__inner">
-      <a class="profile-bar__brand" href="#top" aria-label="Volver al inicio"><img src="/assets/logo-ies11.svg" alt="" width="34" height="34"></a>
+      <a class="profile-bar__brand" href="/" aria-label="Volver al inicio"><img src="/assets/logo-ies11.svg" alt="" width="34" height="34"></a>
       <ul class="profile-bar__list">
-        <li><a class="profile-bar__link" href="#carreras"><span data-icon="user-plus"></span>Ingresantes</a></li>
-        <li><a class="profile-bar__link" href="#tramites"><span data-icon="users"></span>Estudiantes</a></li>
-        <li><a class="profile-bar__link" href="#calendario"><span data-icon="calendar"></span>Mesas y fechas</a></li>
-        <li><a class="profile-bar__link" href="#tramites" data-procedure-icon="diploma"><span data-icon="graduation"></span>Egresados</a></li>
-        <li><a class="profile-bar__link" href="#institucional"><span data-icon="building"></span>Institucional</a></li>
-        <li><a class="profile-bar__link" href="#novedades"><span data-icon="newspaper"></span>Novedades</a></li>
+        <li><a class="profile-bar__link" href="/ingresantes"><span data-icon="user-plus"></span>Ingresantes</a></li>
+        <li><a class="profile-bar__link" href="/estudiantes#tramites"><span data-icon="users"></span>Trámites</a></li>
+        <li><a class="profile-bar__link" href="/estudiantes#calendario"><span data-icon="calendar"></span>Mesas y fechas</a></li>
+        <li><a class="profile-bar__link" href="/estudiantes#tramites" data-procedure-icon="diploma"><span data-icon="graduation"></span>Egresados</a></li>
+        <li><a class="profile-bar__link" href="/institucional"><span data-icon="building"></span>Institucional</a></li>
+        <li><a class="profile-bar__link" href="/novedades"><span data-icon="newspaper"></span>Novedades</a></li>
+        <li><a class="profile-bar__link" href="/contacto"><span data-icon="mail"></span>Contacto</a></li>
       </ul>
-      <a class="btn btn--brand btn--sm profile-bar__cta" href="#carreras" data-preinscription>Preinscribite</a>
+      <a class="btn btn--brand btn--sm profile-bar__cta" href="/ingresantes#carreras" data-preinscription>Preinscribite</a>
     </div>
   </nav>
 
   <main id="contenido">
     <h1 class="sr-only">Instituto de Educación Superior N° 11 — Formando profesionales con compromiso social</h1>
 
+    <!-- Cada bloque de <main> declara en data-page la(s) página(s) donde aparece (ver PAGES en main.js) -->
+
+    <!-- ═══ Encabezado de página interna (lo completa main.js) ═══ -->
+    <header class="page-intro" id="pageIntro" data-page="ingresantes estudiantes institucional novedades contacto">
+      <div class="container page-intro__inner">
+        <nav class="page-intro__crumbs" aria-label="Estás en"><a href="/">Inicio</a><span data-icon="chevron-right"></span><span id="pageIntroCrumb" aria-current="page"></span></nav>
+        <div class="page-intro__row">
+          <span class="page-intro__icon" id="pageIntroIcon" aria-hidden="true"></span>
+          <div>
+            <h2 class="page-intro__title" id="pageIntroTitle"></h2>
+            <p class="page-intro__lead" id="pageIntroLead"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
     <!-- ═══ Hero: carrusel de destacados ═══ -->
-    <section class="hero" aria-roledescription="carrusel" aria-label="Destacados">
+    <section class="hero" data-page="home" aria-roledescription="carrusel" aria-label="Destacados">
       <div class="carousel" id="heroCarousel">
         <div class="hero__viewport">
           <div class="hero__track" id="heroTrack" data-track aria-live="off"></div>
+          <!-- Próxima fecha del calendario: el banner informa, no sólo decora -->
+          <a class="hero-next" id="heroNext" href="#calendario" hidden></a>
+          <a class="hero-scroll" href="#accesos" aria-label="Seguir bajando">
+            <span class="hero-scroll__mouse" aria-hidden="true"><span class="hero-scroll__wheel"></span></span>
+            <span class="hero-scroll__text">Descubrí más</span>
+          </a>
         </div>
         <div class="carousel-controls">
           <button class="carousel-controls__arrow" type="button" data-prev aria-label="Diapositiva anterior"><span data-icon="chevron-left"></span></button>
@@ -94,26 +126,234 @@
       </div>
     </section>
 
-    <!-- ═══ ¿Qué necesitás hacer hoy? ═══ -->
-    <section class="section section--tight" aria-labelledby="quickTitle">
+    <!-- ═══ Elegí tu camino: cada perfil lleva a su página ═══ -->
+    <section class="section section--tight" id="accesos" data-page="home" aria-labelledby="pathsTitle">
       <div class="container">
         <header class="section-head">
-          <h2 class="section-title" id="quickTitle">¿Qué necesitás hacer hoy?</h2>
-          <p class="section-sub">Los accesos más buscados por la comunidad del IES N° 11.</p>
+          <h2 class="section-title" id="pathsTitle">Elegí tu camino</h2>
+          <p class="section-sub">¿En qué momento de tu camino estás? Girá la tarjeta y encontrá lo que necesitás.</p>
         </header>
-        <ul class="quick-actions">
-          <li><a class="quick-action" href="#carreras" data-preinscription><span class="quick-action__icon"><span data-icon="user-plus"></span></span>Preinscribirme</a></li>
-          <li><a class="quick-action" href="#calendario" data-calendar-tab="mesa-extraordinaria"><span class="quick-action__icon"><span data-icon="calendar"></span></span>Ver mesas de examen</a></li>
-          <li><a class="quick-action" href="#tramites" data-procedure-icon="document"><span class="quick-action__icon"><span data-icon="file-text"></span></span>Pedir constancia</a></li>
-          <li><a class="quick-action" href="#tramites" data-procedure-icon="bus"><span class="quick-action__icon"><span data-icon="bus"></span></span>Boleto BEGU</a></li>
-          <li><a class="quick-action" href="#tramites" data-procedure-icon="scholarship"><span class="quick-action__icon"><span data-icon="award"></span></span>Becas Progresar</a></li>
-          <li><button class="quick-action" type="button" data-open-chat><span class="quick-action__icon quick-action__icon--accent"><span data-icon="bot"></span></span>Consultar al asistente</button></li>
+        <ul class="paths paths--flip">
+          <li class="flip-card" data-flip>
+            <button class="flip-card__toggle" type="button" aria-expanded="false" aria-controls="pathBackTecnicatura" aria-label="Ver opciones: Busco una tecnicatura"><span data-icon="plus"></span></button>
+            <div class="flip-card__inner">
+              <div class="flip-card__face flip-card__front">
+                <div class="flip-card__media" data-home-photo="pathImages.tecnicatura"><div class="art art--2"></div></div>
+                <div class="flip-card__content">
+                  <span class="flip-card__icon"><span data-icon="book-open"></span></span>
+                  <h3 class="flip-card__title">Busco una tecnicatura</h3>
+                  <p class="flip-card__text">Tecnicaturas superiores con título oficial, en 3 años.</p>
+                  <span class="flip-card__hint" aria-hidden="true">Ver opciones <span data-icon="chevron-right"></span></span>
+                </div>
+              </div>
+              <div class="flip-card__face flip-card__back" id="pathBackTecnicatura">
+                <p class="flip-card__back-title" aria-hidden="true"><span data-icon="book-open"></span>Busco una tecnicatura</p>
+                <ul class="flip-card__links">
+                  <li><a href="/ingresantes#careersList" data-area-filter="all">Ver todas las carreras<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/ingresantes#carreras">Explorar por área<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/ingresantes#carreras" data-preinscription>Preinscribirme<span data-icon="chevron-right"></span></a></li>
+                </ul>
+                <a class="flip-card__go" href="/ingresantes#careersList" data-area-filter="all">Ver la oferta<span data-icon="arrow-right"></span></a>
+              </div>
+            </div>
+          </li>
+          <li class="flip-card" data-flip>
+            <button class="flip-card__toggle" type="button" aria-expanded="false" aria-controls="pathBackIngresante" aria-label="Ver opciones: Quiero estudiar"><span data-icon="plus"></span></button>
+            <div class="flip-card__inner">
+              <div class="flip-card__face flip-card__front">
+                <div class="flip-card__media" data-home-photo="pathImages.ingresante"><div class="art"></div></div>
+                <div class="flip-card__content">
+                  <span class="flip-card__icon"><span data-icon="user-plus"></span></span>
+                  <h3 class="flip-card__title">Quiero estudiar</h3>
+                  <p class="flip-card__text">Preinscripción online y cursillos de ingreso.</p>
+                  <span class="flip-card__hint" aria-hidden="true">Ver opciones <span data-icon="chevron-right"></span></span>
+                </div>
+              </div>
+              <div class="flip-card__face flip-card__back" id="pathBackIngresante">
+                <p class="flip-card__back-title" aria-hidden="true"><span data-icon="user-plus"></span>Quiero estudiar</p>
+                <ul class="flip-card__links">
+                  <li><a href="/ingresantes#carreras" data-preinscription>Preinscribirme<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/ingresantes#carreras">Ver carreras<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/estudiantes#calendario" data-calendar-tab="cursillo">Cursillos de ingreso<span data-icon="chevron-right"></span></a></li>
+                </ul>
+                <a class="flip-card__go" href="/ingresantes">Ir a Ingresantes<span data-icon="arrow-right"></span></a>
+              </div>
+            </div>
+          </li>
+          <li class="flip-card" data-flip>
+            <button class="flip-card__toggle" type="button" aria-expanded="false" aria-controls="pathBackEstudiante" aria-label="Ver opciones: Ya soy estudiante"><span data-icon="plus"></span></button>
+            <div class="flip-card__inner">
+              <div class="flip-card__face flip-card__front">
+                <div class="flip-card__media" data-home-photo="pathImages.estudiante"><div class="art art--3"></div></div>
+                <div class="flip-card__content">
+                  <span class="flip-card__icon"><span data-icon="users"></span></span>
+                  <h3 class="flip-card__title">Ya soy estudiante</h3>
+                  <p class="flip-card__text">Mesas de examen, calendario y trámites.</p>
+                  <span class="flip-card__hint" aria-hidden="true">Ver opciones <span data-icon="chevron-right"></span></span>
+                </div>
+              </div>
+              <div class="flip-card__face flip-card__back" id="pathBackEstudiante">
+                <p class="flip-card__back-title" aria-hidden="true"><span data-icon="users"></span>Ya soy estudiante</p>
+                <ul class="flip-card__links">
+                  <li><a href="/estudiantes#calendario" data-calendar-tab="mesa-ordinaria">Mesas de examen<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/estudiantes#tramites">Trámites<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/estudiantes#tramites" data-procedure-icon="bus">Boleto BEGU<span data-icon="chevron-right"></span></a></li>
+                </ul>
+                <a class="flip-card__go" href="/estudiantes">Ir a Estudiantes<span data-icon="arrow-right"></span></a>
+              </div>
+            </div>
+          </li>
+          <li class="flip-card" data-flip>
+            <button class="flip-card__toggle" type="button" aria-expanded="false" aria-controls="pathBackEgresado" aria-label="Ver opciones: Egresados"><span data-icon="plus"></span></button>
+            <div class="flip-card__inner">
+              <div class="flip-card__face flip-card__front">
+                <div class="flip-card__media" data-home-photo="pathImages.egresado"><div class="art art--2"></div></div>
+                <div class="flip-card__content">
+                  <span class="flip-card__icon"><span data-icon="graduation"></span></span>
+                  <h3 class="flip-card__title">Egresados</h3>
+                  <p class="flip-card__text">Tu título, constancias y el vínculo con el Instituto.</p>
+                  <span class="flip-card__hint" aria-hidden="true">Ver opciones <span data-icon="chevron-right"></span></span>
+                </div>
+              </div>
+              <div class="flip-card__face flip-card__back" id="pathBackEgresado">
+                <p class="flip-card__back-title" aria-hidden="true"><span data-icon="graduation"></span>Egresados</p>
+                <ul class="flip-card__links">
+                  <li><a href="/estudiantes#tramites" data-procedure-icon="diploma">Pedir título<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/estudiantes#tramites" data-procedure-icon="document">Pedir constancia<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/contacto#consultas">Hacer una consulta<span data-icon="chevron-right"></span></a></li>
+                </ul>
+                <a class="flip-card__go" href="/estudiantes#tramites">Ver trámites<span data-icon="arrow-right"></span></a>
+              </div>
+            </div>
+          </li>
+          <li class="flip-card" data-flip>
+            <button class="flip-card__toggle" type="button" aria-expanded="false" aria-controls="pathBackInstitucional" aria-label="Ver opciones: Conocé el IES"><span data-icon="plus"></span></button>
+            <div class="flip-card__inner">
+              <div class="flip-card__face flip-card__front">
+                <div class="flip-card__media" data-home-photo="pathImages.institucional"><div class="art art--3"></div></div>
+                <div class="flip-card__content">
+                  <span class="flip-card__icon"><span data-icon="building"></span></span>
+                  <h3 class="flip-card__title">Conocé el IES</h3>
+                  <p class="flip-card__text">Misión, autoridades y vida institucional.</p>
+                  <span class="flip-card__hint" aria-hidden="true">Ver opciones <span data-icon="chevron-right"></span></span>
+                </div>
+              </div>
+              <div class="flip-card__face flip-card__back" id="pathBackInstitucional">
+                <p class="flip-card__back-title" aria-hidden="true"><span data-icon="building"></span>Conocé el IES</p>
+                <ul class="flip-card__links">
+                  <li><a href="/institucional#institucional" data-showcase-open="mision">Misión<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/institucional#institucional" data-showcase-open="autoridades">Autoridades<span data-icon="chevron-right"></span></a></li>
+                  <li><a href="/institucional#vida">Vida institucional<span data-icon="chevron-right"></span></a></li>
+                </ul>
+                <a class="flip-card__go" href="/institucional">Ir a Institucional<span data-icon="arrow-right"></span></a>
+              </div>
+            </div>
+          </li>
         </ul>
+        <p class="paths__help">¿No encontrás lo que buscás? <button class="link-chevron" type="button" data-open-chat>Preguntale al asistente <span data-icon="chevron-right"></span></button></p>
+      </div>
+    </section>
+
+    <!-- ═══ Números destacados (administrable; si está vacío se calcula de las carreras) ═══ -->
+    <section class="section section--tight stats-section" data-page="home" aria-labelledby="statsTitle" hidden>
+      <div class="container">
+        <h2 class="sr-only" id="statsTitle">El IES N° 11 en números</h2>
+        <ul class="stats-band" id="statsBand"></ul>
+      </div>
+    </section>
+
+    <!-- ═══ ¿Cuál va a ser tu próximo paso? (slider dividido: foto + texto) ═══ -->
+    <section class="section section--tinted" id="proximoPaso" data-page="home" aria-labelledby="nextStepTitle">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="nextStepTitle">¿Cuál va a ser tu próximo paso?</h2>
+          <p class="section-sub">Tres pasos para empezar a estudiar en el IES N° 11.</p>
+        </header>
+        <div class="carousel next-steps" id="nextStepCarousel" aria-roledescription="carrusel" aria-label="Próximos pasos">
+          <div class="carousel__track next-steps__track" data-track>
+            <article class="next-step" aria-roledescription="diapositiva" aria-label="1 de 3: Tecnicaturas superiores">
+              <div class="next-step__media" data-home-photo="nextStepImages.tecnicaturas"><div class="art art--2"><span data-icon="graduation"></span></div></div>
+              <div class="next-step__body">
+                <span class="next-step__badge"><span data-icon="award"></span>3 años · Título oficial</span>
+                <h3 class="next-step__title">Tecnicaturas superiores</h3>
+                <p class="next-step__text">Carreras de nivel superior con título oficial, pensadas para que te formes y salgas a trabajar en lo que te gusta.</p>
+                <a class="btn btn--cta" href="/ingresantes#careersList" data-area-filter="all">Ver todas las carreras <span data-icon="arrow-right"></span></a>
+              </div>
+            </article>
+            <article class="next-step" aria-roledescription="diapositiva" aria-label="2 de 3: Cursillo de ingreso">
+              <div class="next-step__media" data-home-photo="nextStepImages.cursillo"><div class="art"><span data-icon="calendar"></span></div></div>
+              <div class="next-step__body">
+                <span class="next-step__badge"><span data-icon="calendar"></span>Antes de empezar</span>
+                <h3 class="next-step__title">Cursillo de ingreso</h3>
+                <p class="next-step__text">Conocé las fechas del cursillo de ingreso y preparate para arrancar tu primer año con todo.</p>
+                <a class="btn btn--cta" href="/estudiantes#calendario" data-calendar-tab="cursillo">Ver fechas del cursillo <span data-icon="arrow-right"></span></a>
+              </div>
+            </article>
+            <article class="next-step" aria-roledescription="diapositiva" aria-label="3 de 3: Preinscripción online">
+              <div class="next-step__media" data-home-photo="nextStepImages.preinscripcion"><div class="art art--3"><span data-icon="user-plus"></span></div></div>
+              <div class="next-step__body">
+                <span class="next-step__badge"><span data-icon="check"></span>Online y gratuita</span>
+                <h3 class="next-step__title">Preinscripción online</h3>
+                <p class="next-step__text">Completá la preinscripción desde donde estés: es gratuita y te lleva pocos minutos.</p>
+                <a class="btn btn--cta" href="/ingresantes#carreras" data-preinscription>Preinscribirme <span data-icon="arrow-right"></span></a>
+              </div>
+            </article>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-controls__arrow" type="button" data-prev aria-label="Paso anterior"><span data-icon="chevron-left"></span></button>
+            <div class="carousel__dots" data-dots></div>
+            <button class="carousel-controls__arrow" type="button" data-next aria-label="Paso siguiente"><span data-icon="chevron-right"></span></button>
+            <button class="carousel-controls__arrow" type="button" data-pause aria-label="Pausar carrusel"><span data-icon="pause"></span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Explorá nuestra propuesta por área (mismas tarjetas que Ingresantes) ═══ -->
+    <section class="section" id="areasInicio" data-page="home" aria-labelledby="homeAreasTitle" hidden>
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="homeAreasTitle">Explorá nuestra propuesta por área</h2>
+          <p class="section-sub">Elegí un área y mirá todas sus carreras.</p>
+        </header>
+        <div class="carousel" id="homeAreasCarousel">
+          <div class="carousel__nav">
+            <button class="carousel-arrow" type="button" data-prev aria-label="Áreas anteriores"><span data-icon="chevron-left"></span></button>
+            <button class="carousel-arrow" type="button" data-next aria-label="Áreas siguientes"><span data-icon="chevron-right"></span></button>
+          </div>
+          <div class="carousel__track" id="homeAreasTrack" data-track></div>
+          <div class="carousel__dots" data-dots></div>
+        </div>
+        <div class="center-actions">
+          <a class="btn btn--outline" href="/ingresantes#careersList" data-area-filter="all">Ver todas las carreras <span data-icon="arrow-right"></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Últimas novedades (carrusel automático en el inicio) ═══ -->
+    <section class="section section--tinted" id="ultimasNovedades" data-page="home" aria-labelledby="homeNewsTitle">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <div>
+            <h2 class="section-title" id="homeNewsTitle">Últimas novedades</h2>
+            <p class="section-sub">Lo más reciente del Instituto.</p>
+          </div>
+          <a class="btn btn--outline" href="/novedades">Ver todas <span data-icon="arrow-right"></span></a>
+        </header>
+        <div class="carousel home-news" id="homeNewsCarousel" aria-roledescription="carrusel" aria-label="Últimas novedades">
+          <div class="carousel__track home-news__track" id="homeNews" data-track></div>
+          <div class="carousel-controls">
+            <button class="carousel-controls__arrow" type="button" data-prev aria-label="Novedades anteriores"><span data-icon="chevron-left"></span></button>
+            <div class="carousel__dots" data-dots></div>
+            <button class="carousel-controls__arrow" type="button" data-next aria-label="Novedades siguientes"><span data-icon="chevron-right"></span></button>
+            <button class="carousel-controls__arrow" type="button" data-pause aria-label="Pausar carrusel"><span data-icon="pause"></span></button>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ═══ Oferta académica por área ═══ -->
-    <section class="section" id="carreras" aria-labelledby="carrerasTitle">
+    <section class="section" id="carreras" data-page="ingresantes" aria-labelledby="carrerasTitle">
       <div class="container">
         <header class="section-head">
           <h2 class="section-title" id="carrerasTitle">Explorá nuestra propuesta por área</h2>
@@ -165,7 +405,7 @@
     </section>
 
     <!-- ═══ Trámites frecuentes ═══ -->
-    <section class="section section--tinted" id="tramites" aria-labelledby="tramitesTitle">
+    <section class="section section--tinted" id="tramites" data-page="estudiantes" aria-labelledby="tramitesTitle">
       <div class="container">
         <header class="section-head">
           <h2 class="section-title" id="tramitesTitle">Trámites frecuentes</h2>
@@ -176,26 +416,39 @@
     </section>
 
     <!-- ═══ Calendario académico ═══ -->
-    <section class="section" id="calendario" aria-labelledby="calendarioTitle">
+    <section class="section" id="calendario" data-page="estudiantes" aria-labelledby="calendarioTitle">
       <div class="container container--narrow">
         <header class="section-head">
           <h2 class="section-title" id="calendarioTitle">Calendario académico</h2>
-          <p class="section-sub">Mesas de examen, feriados, cursillos e inscripciones, actualizados por Bedelía.</p>
+          <p class="section-sub">Inscripciones, mesas de examen, inicio de clases, eventos y capacitaciones, actualizados por Bedelía.</p>
         </header>
 
-        <div class="tabs" role="tablist" aria-label="Categorías del calendario">
-          <button class="tab" type="button" role="tab" id="tab-mesa-ordinaria" data-category="mesa-ordinaria" aria-controls="calendarPanel" aria-selected="true">Mesas Ordinarias <span class="tab__count" data-count="mesa-ordinaria">0</span></button>
-          <button class="tab" type="button" role="tab" id="tab-mesa-extraordinaria" data-category="mesa-extraordinaria" aria-controls="calendarPanel" aria-selected="false" tabindex="-1">Mesas Extraordinarias <span class="tab__count" data-count="mesa-extraordinaria">0</span></button>
-          <button class="tab" type="button" role="tab" id="tab-feriado" data-category="feriado" aria-controls="calendarPanel" aria-selected="false" tabindex="-1">Feriados e Inasistencias <span class="tab__count" data-count="feriado">0</span></button>
-          <button class="tab" type="button" role="tab" id="tab-cursillo" data-category="cursillo" aria-controls="calendarPanel" aria-selected="false" tabindex="-1">Cursillos e Inscripción <span class="tab__count" data-count="cursillo">0</span></button>
+        <div class="cal-toolbar">
+          <div class="tabs cal-views" role="group" aria-label="Vista del calendario">
+            <button class="tab" type="button" data-cal-view="month" aria-pressed="true"><span data-icon="calendar"></span>Mes</button>
+            <button class="tab" type="button" data-cal-view="list" aria-pressed="false"><span data-icon="list"></span>Próximas fechas</button>
+          </div>
         </div>
+        <div class="chip-row cal-filters" id="calendarFilters" role="group" aria-label="Filtrar por categoría"></div>
 
-        <div id="calendarPanel" role="tabpanel" aria-labelledby="tab-mesa-ordinaria" tabindex="0"></div>
+        <div id="calendarPanel" aria-live="polite"></div>
+
+        <div class="exam-boards" id="mesas" hidden>
+          <div class="filter-bar">
+            <h3 class="filter-bar__title">Tribunales de mesas de examen</h3>
+            <label class="select-pill">
+              <span class="sr-only">Carrera</span>
+              <select class="select-pill__control" id="filterExamCareer"><option value="all">Todas las carreras</option></select>
+              <span data-icon="chevron-down"></span>
+            </label>
+          </div>
+          <div id="examBoardsPanel"></div>
+        </div>
       </div>
     </section>
 
     <!-- ═══ Institucional: panel dividido ═══ -->
-    <section class="section section--flush" id="institucional" aria-labelledby="institucionalTitle">
+    <section class="section section--flush" id="institucional" data-page="institucional" aria-labelledby="institucionalTitle">
       <div class="container-wide showcase">
         <div class="showcase__media" id="showcaseMedia"></div>
         <div class="showcase__panel">
@@ -213,8 +466,39 @@
       </div>
     </section>
 
+    <!-- ═══ Vida institucional (se muestra si hay publicaciones) ═══ -->
+    <section class="section" id="vida" data-page="institucional" aria-labelledby="vidaTitle" hidden>
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="vidaTitle">Vida institucional</h2>
+          <p class="section-sub">Jornadas, prácticas y comunidad: así se vive el IES N° 11 todos los días.</p>
+        </header>
+        <div class="chip-row" id="galleryFilters" role="group" aria-label="Filtrar por categoría"></div>
+        <ul class="gallery" id="galleryGrid"></ul>
+      </div>
+    </section>
+
+    <!-- ═══ Testimonios (se muestra si hay alguno cargado) ═══ -->
+    <section class="section section--tinted" id="testimonios" data-page="ingresantes" aria-labelledby="testimoniosTitle" hidden>
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title" id="testimoniosTitle">Historias que inspiran</h2>
+          <p class="section-sub">Egresados, egresadas y estudiantes cuentan cómo el IES N° 11 cambió su camino.</p>
+        </header>
+
+        <div class="carousel" id="testimonialsCarousel">
+          <div class="carousel__nav">
+            <button class="carousel-arrow" type="button" data-prev aria-label="Testimonios anteriores"><span data-icon="chevron-left"></span></button>
+            <button class="carousel-arrow" type="button" data-next aria-label="Testimonios siguientes"><span data-icon="chevron-right"></span></button>
+          </div>
+          <div class="carousel__track" id="testimonialsTrack" data-track></div>
+          <div class="carousel__dots" data-dots></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ Novedades ═══ -->
-    <section class="section" id="novedades" aria-labelledby="novedadesTitle">
+    <section class="section" id="novedades" data-page="novedades" aria-labelledby="novedadesTitle">
       <div class="container">
         <header class="section-head">
           <h2 class="section-title" id="novedadesTitle">Lo que está pasando</h2>
@@ -243,15 +527,98 @@
       </div>
     </section>
 
+    <!-- ═══ Consultas: formulario que llega al panel y se responde por correo ═══ -->
+    <section class="section section--tinted" id="consultas" data-page="contacto" aria-labelledby="consultasTitle">
+      <div class="container contact">
+        <div class="contact__intro">
+          <h2 class="section-title" id="consultasTitle">¿Tenés dudas? Escribinos</h2>
+          <p class="section-sub">Te respondemos por correo. Para urgencias, también podés acercarte a Bedelía.</p>
+          <ul class="contact__info" id="contactInfo"></ul>
+          <div id="contactMap"></div>
+        </div>
+
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="form-alert" data-form-error role="alert" hidden></div>
+          <div class="contact__grid">
+            <div class="field">
+              <label class="field__label" for="cName">Nombre y apellido <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="cName" name="name" type="text" autocomplete="name" maxlength="80" required>
+              <p class="field__error" data-error-for="name" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cEmail">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="cEmail" name="email" type="email" autocomplete="email" maxlength="120" required>
+              <p class="field__error" data-error-for="email" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cPhone">Teléfono <span class="muted">(opcional)</span></label>
+              <input class="input" id="cPhone" name="phone" type="tel" autocomplete="tel" maxlength="30">
+              <p class="field__error" data-error-for="phone" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="cSubject">Motivo</label>
+              <select class="input" id="cSubject" name="subject">
+                <option>Preinscripción</option>
+                <option>Carreras</option>
+                <option>Trámites</option>
+                <option>Becas</option>
+                <option>Mesas de examen</option>
+                <option>Otro</option>
+              </select>
+              <p class="field__error" data-error-for="subject" hidden></p>
+            </div>
+            <div class="field field--full">
+              <label class="field__label" for="cCareer">Carrera de interés <span class="muted">(opcional)</span></label>
+              <select class="input" id="cCareer" name="career"><option value="">Todavía no sé</option></select>
+            </div>
+            <div class="field field--full">
+              <label class="field__label" for="cMessage">Tu consulta <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="input" id="cMessage" name="message" rows="5" maxlength="2000" required></textarea>
+              <p class="field__error" data-error-for="message" hidden></p>
+            </div>
+            <!-- Honeypot anti-spam: invisible para las personas -->
+            <div class="sr-only" aria-hidden="true">
+              <label for="cWebsite">No completar</label>
+              <input id="cWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="field field--full">
+              <label class="check"><input type="checkbox" name="consent" required> Acepto que el IES N° 11 use estos datos sólo para responder mi consulta.</label>
+              <p class="field__error" data-error-for="consent" hidden></p>
+            </div>
+          </div>
+          <button class="btn btn--brand btn--lg" type="submit" id="contactSubmit"><span data-icon="send"></span>Enviar consulta</button>
+        </form>
+        <div class="contact__done" id="contactDone" role="status" tabindex="-1" hidden>
+          <span class="contact__done-icon"><span data-icon="check"></span></span>
+          <h3>¡Recibimos tu consulta!</h3>
+          <p>Te vamos a responder a <strong id="contactDoneEmail"></strong>. Revisá también la carpeta de spam.</p>
+          <button class="btn btn--outline" type="button" id="contactAgain">Enviar otra consulta</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Redes sociales (se muestra si hay Facebook/Instagram cargados) ═══ -->
+    <section class="section section--tight" id="redes" data-page="contacto" aria-labelledby="redesTitle" hidden>
+      <div class="container">
+        <div class="social-band">
+          <div class="social-band__intro">
+            <h2 class="social-band__title" id="redesTitle">Seguinos en redes</h2>
+            <p class="social-band__text">Fechas de inscripción, mesas, jornadas y la vida del IES N° 11, todos los días.</p>
+          </div>
+          <div class="social-band__links" id="socialBandLinks"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ CTA final ═══ -->
-    <section class="section section--tight" aria-label="Preinscripción">
+    <section class="section section--tight" data-page="home ingresantes" aria-label="Preinscripción">
       <div class="container">
         <div class="cta-band">
           <div>
             <h2 class="cta-band__title">¿Listo/a para empezar tu carrera?</h2>
             <p class="cta-band__text">La preinscripción es online, gratuita y te lleva pocos minutos.</p>
           </div>
-          <a class="btn btn--cta" href="#carreras" data-preinscription>Preinscripción Online <span data-icon="arrow-right"></span></a>
+          <a class="btn btn--cta" href="/ingresantes#carreras" data-preinscription>Preinscripción Online <span data-icon="arrow-right"></span></a>
         </div>
       </div>
     </section>
@@ -269,33 +636,35 @@
           </span>
         </a>
         <p class="footer__motto">Formando profesionales con compromiso social.</p>
-        <div class="footer__social" id="footerSocial"></div>
+        <div class="social-links footer__social" id="footerSocial"></div>
       </div>
 
       <div>
         <h2 class="footer__title">El Instituto</h2>
         <ul class="footer__list">
-          <li><a href="#institucional">Misión y visión</a></li>
-          <li><a href="#institucional" data-showcase-open="autoridades">Autoridades</a></li>
-          <li><a href="#novedades">Novedades</a></li>
+          <li><a href="/institucional#institucional" data-showcase-open="mision">Misión y visión</a></li>
+          <li><a href="/institucional#institucional" data-showcase-open="autoridades">Autoridades</a></li>
+          <li><a href="/novedades">Novedades</a></li>
+          <li><a href="/institucional#vida">Vida institucional</a></li>
+          <li><a href="/contacto">Hacé tu consulta</a></li>
         </ul>
       </div>
 
       <div>
         <h2 class="footer__title">Oferta educativa</h2>
         <ul class="footer__list">
-          <li><a href="#carreras">Carreras</a></li>
-          <li><a href="#carreras" data-preinscription>Preinscripción</a></li>
-          <li><a href="#calendario" data-calendar-tab="cursillo">Cursillos de ingreso</a></li>
+          <li><a href="/ingresantes#carreras">Carreras</a></li>
+          <li><a href="/ingresantes#carreras" data-preinscription>Preinscripción</a></li>
+          <li><a href="/estudiantes#calendario" data-calendar-tab="cursillo">Cursillos de ingreso</a></li>
         </ul>
       </div>
 
       <div>
         <h2 class="footer__title">Estudiantes</h2>
         <ul class="footer__list">
-          <li><a href="#tramites">Trámites</a></li>
-          <li><a href="#calendario" data-calendar-tab="mesa-ordinaria">Mesas de examen</a></li>
-          <li><a href="#calendario" data-calendar-tab="feriado">Feriados</a></li>
+          <li><a href="/estudiantes#tramites">Trámites</a></li>
+          <li><a href="/estudiantes#calendario" data-calendar-tab="mesa-ordinaria">Mesas de examen</a></li>
+          <li><a href="/estudiantes#calendario" data-calendar-tab="feriado">Feriados</a></li>
         </ul>
       </div>
 
@@ -321,18 +690,19 @@
     </div>
     <nav class="drawer__nav" aria-label="Secciones">
       <ul>
-        <li><a href="#carreras">Carreras<span data-icon="chevron-right"></span></a></li>
-        <li><a href="#tramites">Trámites<span data-icon="chevron-right"></span></a></li>
-        <li><a href="#calendario">Calendario y mesas<span data-icon="chevron-right"></span></a></li>
-        <li><a href="#institucional">Institucional<span data-icon="chevron-right"></span></a></li>
-        <li><a href="#novedades">Novedades<span data-icon="chevron-right"></span></a></li>
-        <li><a href="#contacto">Contacto<span data-icon="chevron-right"></span></a></li>
+        <li><a href="/">Inicio<span data-icon="chevron-right"></span></a></li>
+        <li><a href="/ingresantes">Ingresantes y carreras<span data-icon="chevron-right"></span></a></li>
+        <li><a href="/estudiantes">Estudiantes: trámites y calendario<span data-icon="chevron-right"></span></a></li>
+        <li><a href="/institucional">Institucional<span data-icon="chevron-right"></span></a></li>
+        <li><a href="/novedades">Novedades<span data-icon="chevron-right"></span></a></li>
+        <li><a href="/contacto">Consultas y contacto<span data-icon="chevron-right"></span></a></li>
       </ul>
     </nav>
     <div class="drawer__footer">
-      <a class="btn btn--cta btn--block" href="#carreras" data-preinscription>Preinscripción Online</a>
+      <a class="btn btn--cta btn--block" href="/ingresantes#carreras" data-preinscription>Preinscripción Online</a>
       <button class="btn btn--ghost-light btn--block" type="button" data-open-chat><span data-icon="bot"></span>Asistente virtual</button>
-      <a class="btn btn--ghost-light btn--block" href="/login"><span data-icon="lock"></span>Acceso administrativo</a>
+
+      <div class="social-links drawer__social" id="drawerSocial"></div>
     </div>
   </dialog>
 

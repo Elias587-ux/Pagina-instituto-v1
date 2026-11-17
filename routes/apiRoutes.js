@@ -7,17 +7,24 @@
  *   GET  /news            GET /news/:id
  *   GET  /careers         GET /careers/:id
  *   GET  /calendar
+ *   GET  /exam-boards
  *   GET  /procedures
  *   GET  /search?q=
  *   GET  /slides
+ *   GET  /testimonials
+ *   GET  /gallery
  *   POST /chat
+ *   POST /contact
  *   POST /auth/login
  *
  * Protegidas (JWT, rol admin/editor):
  *   GET  /auth/me
  *   GET  /admin/stats
  *   PUT  /admin/settings
- *   GET|POST       /admin/:resource          (news | careers | calendar | procedures | slides)
+ *   POST /admin/uploads?kind=logo|image|pdf   (cuerpo binario del archivo)
+ *   POST /admin/inquiries/:id/reply            (emails the answer to the applicant)
+ *   POST /admin/testimonials/import-google      (Google reviews → hidden testimonials)
+ *   GET|POST       /admin/:resource          (news | careers | calendar | examBoards | procedures | slides | testimonials | gallery | inquiries)
  *   PUT|DELETE     /admin/:resource/:id
  */
 const express = require('express');
@@ -36,6 +43,10 @@ const search = require('../controllers/searchController');
 const admin = require('../controllers/adminController');
 const slides = require('../controllers/slidesController');
 const chat = require('../controllers/chatController');
+const uploads = require('../controllers/uploadController');
+const testimonials = require('../controllers/testimonialsController');
+const gallery = require('../controllers/galleryController');
+const contact = require('../controllers/contactController');
 
 const router = express.Router();
 
@@ -57,6 +68,16 @@ const chatLimiter = rateLimit({
   message: { error: { message: 'Estás enviando muchos mensajes. Esperá un minuto e intentá de nuevo.' } },
 });
 
+// Limits contact-form submissions per IP (spam protection, together with the honeypot)
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  skipFailedRequests: true, // fixing validation errors must not use up the quota
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: { message: 'Ya recibimos varias consultas desde tu conexión. Probá de nuevo en 15 minutos.' } },
+});
+
 router.get('/health', (_req, res) => res.json({ status: 'ok', database: isDBConnected() ? 'connected' : 'disconnected' }));
 
 router.use(requireDB);
@@ -72,16 +93,23 @@ router.get('/news/:id', news.getNews);
 router.get('/careers', academic.listCareers);
 router.get('/careers/:id', academic.getCareer);
 router.get('/calendar', academic.listCalendar);
+router.get('/exam-boards', academic.listExamBoards);
 router.get('/procedures', procedures.listProcedures);
 router.get('/search', search.search);
 router.get('/slides', slides.listSlides);
+router.get('/testimonials', testimonials.listTestimonials);
+router.get('/gallery', gallery.listGallery);
 router.post('/chat', chatLimiter, chat.chat);
+router.post('/contact', contactLimiter, contact.submitInquiry);
 
 // ─── Panel de administración ───
 const adminRouter = express.Router();
 adminRouter.use(protect, authorize('admin', 'editor'));
 adminRouter.get('/stats', admin.stats);
 adminRouter.put('/settings', admin.updateSettings);
+adminRouter.post('/uploads', express.raw({ type: () => true, limit: uploads.MAX_UPLOAD_SIZE }), uploads.upload);
+adminRouter.post('/inquiries/:id/reply', contact.replyInquiry);
+adminRouter.post('/testimonials/import-google', testimonials.importGoogleReviews);
 adminRouter.get('/:resource', admin.list);
 adminRouter.post('/:resource', admin.create);
 adminRouter.put('/:resource/:id', admin.update);

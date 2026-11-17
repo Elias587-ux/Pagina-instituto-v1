@@ -45,8 +45,13 @@ app.use(
       useDefaults: true,
       directives: {
         'img-src': ["'self'", 'data:', 'https:'],
+        // News videos uploaded to Cloudinary (utils/storage.js)
+        'media-src': ["'self'", 'https://res.cloudinary.com'],
         'font-src': ["'self'", 'https://fonts.gstatic.com'],
         'style-src': ["'self'", 'https://fonts.googleapis.com'],
+        // Google Maps embed + social video embeds of "Vida institucional" (keep in sync with public/js/embeds.js)
+        // 'self' keeps the admin live preview (iframe of /?preview=1) working
+        'frame-src': ["'self'", 'https://www.google.com', 'https://www.youtube-nocookie.com', 'https://www.instagram.com', 'https://www.tiktok.com', 'https://www.facebook.com'],
         'upgrade-insecure-requests': isProd ? [] : null,
       },
     },
