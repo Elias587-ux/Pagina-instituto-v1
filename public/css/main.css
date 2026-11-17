@@ -1386,7 +1386,18 @@ main.is-page-entering {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-text);
-  transform: rotateY(180deg);
+  /* translateZ: both faces share one plane, so some browsers (mobile) sent taps
+     on the back's links to the hidden front. Only the visible face takes clicks. */
+  transform: rotateY(180deg) translateZ(1px);
+  pointer-events: none;
+}
+
+.flip-card.is-flipped .flip-card__back {
+  pointer-events: auto;
+}
+
+.flip-card.is-flipped .flip-card__front {
+  pointer-events: none;
 }
 
 .flip-card__back-title {
