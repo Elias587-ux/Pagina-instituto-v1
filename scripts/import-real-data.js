@@ -202,7 +202,7 @@ const procedures = [
   {
     title: 'Permisos de examen',
     status: 'cerrado',
-    icon: 'diploma',
+    icon: 'document', // student procedure; "diploma" is reserved for títulos (graduates)
     order: 3,
     description:
       'Solicitud de permisos de examen para las mesas de Febrero-Marzo de las carreras con Ciclo Lectivo Marzo (ICL Marzo): jueves 19 y viernes 20 de febrero de 2026. Las mesas se realizan en 2 llamados: 1° del 23 de febrero al 5 de marzo y 2° del 9 al 20 de marzo de 2026.',

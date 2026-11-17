@@ -995,7 +995,10 @@ function initProcedures() {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('[data-procedure-icon]');
     if (!link) return;
-    const p = state.procedures.find((x) => x.icon === link.dataset.procedureIcon);
+    // data-procedure-match (words of the title) is precise; the icon is only a fallback
+    const words = normalize(link.dataset.procedureMatch || '').split(/\s+/).filter(Boolean);
+    const byTitle = words.length ? state.procedures.find((x) => words.every((w) => normalize(x.title).includes(w))) : null;
+    const p = byTitle || state.procedures.find((x) => x.icon === link.dataset.procedureIcon);
     if (p) {
       e.preventDefault();
       openProcedureModal(p._id);
