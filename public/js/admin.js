@@ -430,7 +430,7 @@ const SECTION_LOADERS = {
   overview: loadStats,
   alert: fillAlertForm,
   preinscription: () => fillSettingsWithPreview('preinscription', $('#preForm'), $('#prePreview'), []),
-  site: () => fillSettingsWithPreview('site', $('#siteForm'), $('#sitePreview'), SITE_PREVIEW_VIEWS),
+  site: fillSiteForm,
   home: fillHomeForm,
 };
 
@@ -1187,6 +1187,34 @@ function initHomeForm() {
   });
 }
 
+/** "Institucional y contacto": building photo as an upload widget (same as the editor's). */
+function initSiteUploads() {
+  const form = $('#siteForm');
+  $('#iImageField').outerHTML = fieldHTML(
+    {
+      name: 'institutional.imageUrl',
+      label: 'Foto del edificio',
+      type: 'upload',
+      kind: 'image',
+      full: true,
+      hint: 'Se muestra en el panel "Conocé el IES N° 11". Horizontal, ideal 1600×1000 px.',
+    },
+    ''
+  );
+  state.siteUploads = bindUploads(form, {
+    submit: $('button[type="submit"]', form),
+    suggestName: () => 'Edificio IES 11',
+    onChange: () => state.previews.site?.update(),
+  });
+}
+
+async function fillSiteForm() {
+  const form = $('#siteForm');
+  await fillSettingsWithPreview('site', form, $('#sitePreview'), SITE_PREVIEW_VIEWS);
+  // Values were set after the widget was built: refresh its thumbnail
+  $$('[data-upload]', form).forEach((box) => state.siteUploads.renderUpload(box, form.elements[box.dataset.upload].value.trim()));
+}
+
 function initSettingsForms() {
   const alertForm = $('#alertForm');
   alertForm.addEventListener('input', updateAlertPreview);
@@ -1365,6 +1393,7 @@ async function init() {
   initDashCalendar();
   initSettingsForms();
   initHomeForm();
+  initSiteUploads();
   initReply();
   api.admin.stats().then((s) => setInquiriesCount(s.newInquiries), () => {});
 
