@@ -4,10 +4,13 @@
  */
 const mongoose = require('mongoose');
 const { urlField, toJSONOptions } = require('../utils/validators');
-const { resolveSocialUrl, needsResolution } = require('../utils/resolveSocialUrl');
+const { resolveSocialUrl, needsResolution, isVideoUrl } = require('../utils/resolveSocialUrl');
 
 // Keep in sync with public/js/embeds.js
 const SOCIAL_VIDEO_HOSTS = /^https:\/\/(www\.|m\.)?(youtube\.com|youtu\.be|instagram\.com|tiktok\.com|facebook\.com|fb\.watch)\//i;
+const FACEBOOK_HOSTS = /^https:\/\/(www\.|m\.)?(facebook\.com|fb\.watch)\//i;
+const FACEBOOK_NOT_A_VIDEO =
+  'Video: este link de Facebook no apunta a un video. Abrí el video o reel en Facebook, tocá Compartir → Copiar enlace y pegalo acá (el video tiene que ser público).';
 const TAGS = ['Jornadas', 'Prácticas', 'Comunidad', 'Deportes y cultura', 'Egresos', 'Instalaciones'];
 
 const galleryItemSchema = new mongoose.Schema(
@@ -41,6 +44,10 @@ galleryItemSchema.pre('validate', async function resolveVideoUrl() {
   // Not limited to isModified: re-saving an old post with a short link also fixes it
   if (needsResolution(this.videoUrl)) {
     this.videoUrl = await resolveSocialUrl(this.videoUrl);
+  }
+  // The Facebook player only embeds a specific video/reel (e.g. /reel/123…), never feeds or unresolved short links
+  if (this.videoUrl && FACEBOOK_HOSTS.test(this.videoUrl) && !isVideoUrl(this.videoUrl)) {
+    this.invalidate('videoUrl', FACEBOOK_NOT_A_VIDEO, this.videoUrl);
   }
 });
 
