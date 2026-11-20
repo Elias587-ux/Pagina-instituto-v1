@@ -155,7 +155,7 @@ const PAGES = {
   home: { path: '/' },
   ingresantes: {
     path: '/ingresantes',
-    label: 'Ingresantes',
+    label: 'Carreras',
     icon: 'user-plus',
     title: 'Quiero estudiar en el IES N° 11',
     lead: 'Conocé las carreras, cómo preinscribirte y lo que cuentan quienes ya estudiaron acá.',
