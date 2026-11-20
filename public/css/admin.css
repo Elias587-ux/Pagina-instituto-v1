@@ -150,10 +150,16 @@
 
 .admin-nav {
   display: grid;
+  align-content: start;
+  flex: 1 1 auto;
   gap: 2px;
+  min-height: 0;
   margin: 0;
   padding: 0;
+  overflow-y: auto;
   list-style: none;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  scrollbar-width: thin;
 }
 
 .admin-nav__btn {
