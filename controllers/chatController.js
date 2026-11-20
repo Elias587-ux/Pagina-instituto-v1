@@ -118,7 +118,7 @@ function replyCareerDetail(career, settings, msg) {
   const shifts = career.shifts?.length ? career.shifts.join(', ') : 'a confirmar';
   const links = [];
   if (career.studyPlanUrl) links.push({ label: 'Plan de estudio', href: career.studyPlanUrl });
-  if (career.cursilloUrl) links.push({ label: 'Cartilla del cursillo de ingreso', href: career.cursilloUrl });
+  if (career.cursilloUrl) links.push({ label: 'Cartilla de ingreso', href: career.cursilloUrl });
   if (career.whatsappChannelUrl) links.push({ label: 'Canal de WhatsApp de la carrera', href: career.whatsappChannelUrl });
   links.push({ label: 'Preinscribirme', href: settings?.links?.preinscriptionUrl || PAGE.careers });
 

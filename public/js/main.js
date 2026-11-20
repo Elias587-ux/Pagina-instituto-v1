@@ -1249,9 +1249,9 @@ async function openCareerModal(id) {
       <div class="modal__actions">
         <button type="button" class="btn btn--cta btn--lg" data-preinscription data-career="${escapeHTML(career.name)}">Preinscribirme</button>
         ${
-          career.cursilloUrl
-            ? `<a class="btn btn--outline btn--lg" href="${escapeHTML(safeUrl(career.cursilloUrl))}"${externalAttrs(career.cursilloUrl)}>${icon('calendar')}Cursillo de ingreso</a>`
-            : `<a class="btn btn--outline btn--lg" href="#calendario" data-close-modal data-calendar-tab="cursillo">${icon('calendar')}Fechas de cursillo</a>`
+          safeUrl(career.cursilloUrl, '')
+            ? `<a class="btn btn--outline btn--lg" href="${escapeHTML(safeUrl(career.cursilloUrl))}"${externalAttrs(career.cursilloUrl)}>${icon('download')}Cartilla de ingreso</a>`
+            : ''
         }
         ${
           safeUrl(career.whatsappChannelUrl, '')

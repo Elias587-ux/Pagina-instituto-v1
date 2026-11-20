@@ -169,7 +169,7 @@ const RESOURCES = {
       { name: 'logoUrl', label: 'Logo de la carrera', type: 'upload', kind: 'logo', full: true, hint: 'PNG, JPG o WebP de hasta 5 MB, cuadrado y con fondo transparente o blanco. Se muestra en la tarjeta y en el detalle.' },
       { name: 'studyPlanUrl', label: 'Plan de estudio (PDF)', type: 'upload', kind: 'pdf', full: true, hint: 'PDF de hasta 15 MB. También podés pegar un enlace externo (ej: Google Drive).' },
       { name: 'imageUrl', label: 'Imagen de portada', type: 'upload', kind: 'image', full: true, hint: 'Opcional, horizontal (ej: 1200×500 px). La primera carrera con imagen de cada área ilustra la tarjeta del área.' },
-      { name: 'cursilloUrl', label: 'Cartilla / cursillo de ingreso', type: 'upload', kind: 'pdf', full: true, hint: 'PDF de la cartilla de ingreso, o un enlace externo (ej: Google Drive o Classroom).' },
+      { name: 'cursilloUrl', label: 'Cartilla de ingreso', type: 'upload', kind: 'pdf', full: true, hint: 'PDF de la cartilla de ingreso, o un enlace externo (ej: Google Drive o Classroom).' },
       { name: 'whatsappChannelUrl', label: 'Canal de WhatsApp de la carrera (URL)', type: 'url', full: true, placeholder: 'https://whatsapp.com/channel/…', hint: 'Opcional. Sólo si la carrera tiene canal propio.' },
       { name: 'coordinator', label: 'Coordinador/a', type: 'text', maxlength: 120, placeholder: 'Ej: Mendoza Martín' },
       { name: 'coordinatorSchedule', label: 'Horario de atención del coordinador/a', type: 'text', maxlength: 160, placeholder: 'Ej: Viernes 16 a 18 hs.' },
