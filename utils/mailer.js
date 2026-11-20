@@ -1,6 +1,6 @@
 /**
  * Outgoing email. Two transports, in order of preference:
- *  1. Brevo HTTP API (BREVO_API_KEY + MAIL_FROM). Works on hosts that block
+ *  1. Brevo HTTP API (BREVO_API_KEY + MAIL_FROM, both required). Works on hosts that block
  *     SMTP ports, like Render's free plan. MAIL_FROM must be a sender
  *     verified in Brevo, e.g. "IES N° 11 <ies11@gmail.com>".
  *  2. SMTP (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and MAIL_FROM).
@@ -13,7 +13,7 @@ const BREVO_ENDPOINT = 'https://api.brevo.com/v3/smtp/email';
 
 let transporter = null;
 
-const isBrevoConfigured = () => Boolean(process.env.BREVO_API_KEY);
+const isBrevoConfigured = () => Boolean(process.env.BREVO_API_KEY && process.env.MAIL_FROM);
 const isSmtpConfigured = () => Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
 const isMailConfigured = () => isBrevoConfigured() || isSmtpConfigured();
 
@@ -52,7 +52,7 @@ async function sendWithBrevo({ to, subject, text, replyTo }) {
       to: [{ email: oneLine(to) }],
       subject: oneLine(subject),
       textContent: text,
-      ...(replyTo ? { replyTo: { email: oneLine(replyTo) } } : {}),
+      ...(replyTo ? { replyTo: { email: parseAddress(replyTo).email } } : {}),
     }),
     signal: AbortSignal.timeout(10000),
   });

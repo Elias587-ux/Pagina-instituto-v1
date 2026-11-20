@@ -73,6 +73,22 @@ test('strips line breaks from subject and addresses (no header injection)', asyn
   assert.equal(calls[0].body.subject, 'Hola Bcc: x@y.com');
 });
 
+test('BREVO_API_KEY without MAIL_FROM is not enough to send', async () => {
+  process.env.BREVO_API_KEY = 'xkeysib-test';
+  const calls = stubFetch(201);
+  assert.equal(isMailConfigured(), false);
+  assert.deepEqual(await sendMail(message), { delivered: false, error: 'not_configured' });
+  assert.equal(calls.length, 0);
+});
+
+test('a reply-to written as "Name <email>" sends only the address', async () => {
+  process.env.BREVO_API_KEY = 'xkeysib-test';
+  process.env.MAIL_FROM = 'ies11@gmail.com';
+  const calls = stubFetch(201);
+  await sendMail({ ...message, replyTo: 'Secretaría <secretaria@gmail.com>' });
+  assert.deepEqual(calls[0].body.replyTo, { email: 'secretaria@gmail.com' });
+});
+
 test('a Brevo error response is reported as send_failed', async () => {
   process.env.BREVO_API_KEY = 'xkeysib-test';
   process.env.MAIL_FROM = 'ies11@gmail.com';
