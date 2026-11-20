@@ -696,7 +696,7 @@
   place-items: center;
   width: 68px;
   height: 68px;
-  padding: 8px;
+  overflow: hidden;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   box-shadow: var(--shadow-lg);
@@ -707,7 +707,7 @@
 .career-card__logo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .career-card:hover .career-card__logo {
@@ -1639,7 +1639,7 @@
   place-items: center;
   width: 124px;
   height: 124px;
-  padding: 12px;
+  overflow: hidden;
   border-radius: var(--radius-xl);
   background: var(--color-surface);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
@@ -1648,7 +1648,7 @@
 .career-hero__logo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .modal--career .modal__hero h2 {
